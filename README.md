@@ -22,7 +22,7 @@ repository and organization instructions.
 ## How it works
 
 The process is described as [Mermaid](https://mermaid.js.org) flowcharts in
-[`flows/`](flows). The entry point is [`project.mmd`](flows/project.mmd), which
+[`flows/`](https://github.com/vanlangenlabs/airflow/tree/main/flows). The entry point is [`project.mmd`](flows/project.mmd), which
 orchestrates the phases below. Each phase is its own subflow.
 
 | Phase | Flow | Purpose |
@@ -71,7 +71,7 @@ records in a `.air/` folder in **your** repository (not in this one).
 | Path | Audience | Description |
 | --- | --- | --- |
 | [`airflow.md`](airflow.md) | AI agent | The operating instructions: rules, statuses, approvals, resume and interaction protocol |
-| [`flows/*.mmd`](flows) | AI agent & humans | The workflow itself, as Mermaid flowcharts with embedded node context |
+| [`flows/*.mmd`](https://github.com/vanlangenlabs/airflow/tree/main/flows) | AI agent & humans | The workflow itself, as Mermaid flowcharts with embedded node context |
 | [`copilot-instructions.md`](copilot-instructions.md) | You | Snippet to hook AIRFlow into GitHub Copilot |
 
 `airflow.md` and the `.mmd` files are written for an AI to read, so they are
