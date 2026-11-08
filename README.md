@@ -58,7 +58,7 @@ your repository's `.github/copilot-instructions.md` (see
 ```markdown
 # AIRFlow
 
-For development work, read and follow https://vanlangen.org/airflow/airflow.md
+For development work, read and follow https://raw.githubusercontent.com/vanlangenlabs/airflow/main/airflow.md
 before acting or resuming. It defines the workflow and links to its Mermaid flows.
 If inaccessible, report the limitation and request an accessible copy; do not guess.
 ```
