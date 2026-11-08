@@ -80,9 +80,39 @@ deliberately dense. For a human-friendly view, use the
 
 ## Viewing the diagrams
 
-- **Viewer:** <https://airflow.vanlangen.org> renders the flows with navigation between subflows.
+- **On GitHub Pages:** click an existing `.mmd` link to open the popup. Close with
+  Escape, the Close button, or a click outside the popup. Zoom with the buttons or
+  mouse wheel and drag to pan; Reset fits the diagram again.
+- **Direct viewer:** [Project flow](viewer/?diagram=flows/project.mmd).
+  Use `viewer/?diagram=flows/concept.mmd` (relative to the site root) for another
+  flow, or copy **Direct link** from the popup. Without a parameter, Project opens.
+- **Source:** the Source link opens the original `.mmd` file. No per-flow Markdown
+  wrapper or generated diagram is needed.
 - **On GitHub:** GitHub renders `.mmd` files directly when you open them, e.g. [`flows/project.mmd`](flows/project.mmd). Note that `%%` comments (node context) are not shown in the rendered diagram; use the *Code* view to read them.
+
+### GitHub Pages integration
+
+The existing Primer theme loads `_includes/head-custom.html`, which includes the
+viewer CSS and JavaScript. `viewer.html` uses the same default layout. Keep Pages
+building from the repository root, as in the existing deployment. No new Jekyll
+plugin, theme, or build step is required. Asset URLs use `relative_url`, and the
+JavaScript derives the site root from its own URL, supporting custom domains and
+project sites such as `/AIRFlow/`.
+
+The diagrams remain the original `flows/*.mmd` files. Ordinary Markdown links such
+as `[Concept](flows/concept.mmd)` work unchanged on Pages. Relative links resolve
+against the containing page. Explicit downloads, new-tab links, and modified
+clicks keep normal browser behavior. Popup interception runs on Pages, not on
+GitHub's own repository interface.
+
+The viewer loads pinned Mermaid 11.12.0 from jsDelivr. Internet access to that CDN
+is required; loading/render errors are displayed. Only same-origin `.mmd` URLs
+inside `flows/` are fetched, without credentials or redirects, with a 256 KiB
+limit and a 15-second loading timeout. Mermaid uses strict security and diagram
+callbacks are disabled. Existing fenced Mermaid blocks still render. The timeout
+can abort network requests but cannot preempt synchronous browser rendering.
 
 ## License
 
 See [LICENSE](LICENSE).
+
