@@ -80,12 +80,12 @@ deliberately dense. For a human-friendly view, use the
 
 ## Viewing the diagrams
 
-- **On GitHub Pages:** click an existing `.mmd` link to open the popup. Close with
-  Escape, the Close button, or a click outside the popup. Zoom with the buttons or
-  mouse wheel and drag to pan; Reset fits the diagram again.
-- **Direct viewer:** [Project flow](viewer/?diagram=flows/project.mmd).
-  Use `viewer/?diagram=flows/concept.mmd` (relative to the site root) for another
-  flow, or copy **Direct link** from the popup. Without a parameter, Project opens.
+- **On GitHub Pages:** clicking a `.mmd` link opens the flow in the viewer, in the
+  same window. A breadcrumb at the top (Documentation › Project › Concept …) shows
+  where you came from and links back. Click a subflow node in a diagram to open it.
+  Zoom with the buttons or mouse wheel and drag to pan; Reset fits the diagram again.
+- **Direct viewer:** [Project flow](viewer/?diagram=flows/project.mmd). Use
+  `viewer/?diagram=flows/concept.mmd` for another flow. Without a parameter, Project opens.
 - **Source:** the Source link opens the original `.mmd` file. No per-flow Markdown
   wrapper or generated diagram is needed.
 - **On GitHub:** GitHub renders `.mmd` files directly when you open them, e.g. [`flows/project.mmd`](flows/project.mmd). Note that `%%` comments (node context) are not shown in the rendered diagram; use the *Code* view to read them.
@@ -102,7 +102,7 @@ project sites such as `/AIRFlow/`.
 The diagrams remain the original `flows/*.mmd` files. Ordinary Markdown links such
 as `[Concept](flows/concept.mmd)` work unchanged on Pages. Relative links resolve
 against the containing page. Explicit downloads, new-tab links, and modified
-clicks keep normal browser behavior. Popup interception runs on Pages, not on
+clicks keep normal browser behavior. Link interception runs on Pages, not on
 GitHub's own repository interface.
 
 The viewer loads pinned Mermaid 11.12.0 from jsDelivr. Internet access to that CDN

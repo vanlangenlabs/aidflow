@@ -54,9 +54,9 @@ async function fetchDiagram(url, signal) {
   } finally { await reader.cancel(); reader.releaseLock(); }
 }
 
-function panZoom(stage, svg, signal) {
+function panZoom(stage, svg, signal, onTap) {
   const original = svg.getAttribute('viewBox').trim().split(/[\s,]+/).map(Number);
-  let box = [...original], pointer;
+  let box = [...original], pointer, moved = 0;
   const draw = () => svg.setAttribute('viewBox', box.join(' '));
   const zoom = factor => {
     const width = Math.min(original[2] * 4, Math.max(original[2] / 20, box[2] * factor));
@@ -69,10 +69,12 @@ function panZoom(stage, svg, signal) {
   stage.addEventListener('pointerdown', e => {
     if (e.button !== 0 || pointer) return;
     pointer = { id: e.pointerId, x: e.clientX, y: e.clientY };
+    moved = 0;
     stage.setPointerCapture(e.pointerId);
   }, { signal });
   stage.addEventListener('pointermove', e => {
     if (!pointer || e.pointerId !== pointer.id) return;
+    moved += Math.abs(e.clientX - pointer.x) + Math.abs(e.clientY - pointer.y);
     const matrix = svg.getScreenCTM();
     if (!matrix) return;
     const inverse = matrix.inverse();
@@ -81,74 +83,113 @@ function panZoom(stage, svg, signal) {
     box[0] += from.x - to.x; box[1] += from.y - to.y;
     pointer.x = e.clientX; pointer.y = e.clientY; draw();
   }, { signal });
+  // Pointer capture retargets events to the stage, so hit-test the node ourselves.
+  stage.addEventListener('pointerup', e => {
+    if (pointer && e.pointerId === pointer.id && moved < 5) {
+      onTap?.(document.elementFromPoint(e.clientX, e.clientY));
+    }
+  }, { signal });
   for (const event of ['pointerup', 'pointercancel', 'lostpointercapture']) {
     stage.addEventListener(event, () => { pointer = undefined; }, { signal });
   }
   return { zoom, reset };
 }
 
-function createViewer(host, modal = false) {
+const relPath = url => url.pathname.slice(root.pathname.length);
+
+function viewerURL(diagram, trail = []) {
+  const url = new URL('viewer/', root);
+  url.searchParams.set('diagram', diagram);
+  if (trail.length) url.searchParams.set('trail', trail.join(','));
+  return url;
+}
+
+// Subflow nodes are labelled "Name: file.mmd"; make them navigable.
+function subflowOf(node) {
+  const match = /([\w-]+\.mmd)\s*$/i.exec(node.textContent.trim());
+  if (!match) return;
+  try { return relPath(diagramURL(match[1], flows)); } catch { return; }
+}
+
+function createViewer(host) {
   host.classList.add('flow-viewer');
   // Only fixed UI markup is inserted here; filenames/errors use textContent.
-  host.innerHTML = `<div class="flow-toolbar"><strong>Flow</strong>
+  host.innerHTML = `<nav class="flow-breadcrumb" aria-label="Breadcrumb"><ol></ol></nav>
+    <div class="flow-toolbar"><strong>Flow</strong>
     <button type="button" data-action="in" aria-label="Zoom in">+</button>
     <button type="button" data-action="out" aria-label="Zoom out">−</button>
     <button type="button" data-action="reset">Reset</button>
-    <a data-link="direct">Direct link</a><a data-link="source">Source</a>
-    ${modal ? '<button type="button" data-action="close" autofocus>Close</button>' : ''}</div>
+    <a data-link="source" target="_blank" rel="noopener">Source</a></div>
     <p class="flow-status" role="status" aria-live="polite"></p>
     <div class="flow-stage" role="region" aria-label="Flow diagram"></div>`;
+  const crumbs = host.querySelector('.flow-breadcrumb ol');
   const title = host.querySelector('strong');
-  title.id = `flow-title-${++nextId}`;
-  host.setAttribute('aria-labelledby', title.id);
   const status = host.querySelector('.flow-status');
   const stage = host.querySelector('.flow-stage');
-  const controls = [...host.querySelectorAll('[data-action]:not([data-action="close"])')];
-  let active, revision = 0, navigation;
-  const cancel = () => { revision++; active?.abort(); navigation = undefined; };
+  const controls = [...host.querySelectorAll('[data-action]')];
+  let navigation;
   host.addEventListener('click', e => {
     const action = e.target.closest('button')?.dataset.action;
-    if (action === 'close') host.close();
     if (action === 'in') navigation?.zoom(1 / 1.25);
     if (action === 'out') navigation?.zoom(1.25);
     if (action === 'reset') navigation?.reset();
   });
-  if (modal) {
-    host.addEventListener('close', cancel);
-    host.addEventListener('click', e => {
-      const r = host.getBoundingClientRect();
-      if (e.target === host && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) host.close();
-    });
+
+  function renderCrumbs(trail, current) {
+    const items = [{ label: 'Documentation', href: root.href }];
+    trail.forEach((path, i) => items.push({
+      label: path.split('/').pop(), href: viewerURL(path, trail.slice(0, i)).href,
+    }));
+    items.push({ label: current.split('/').pop() });
+    crumbs.replaceChildren(...items.map((item, i) => {
+      const li = document.createElement('li');
+      if (item.href && i < items.length - 1) {
+        const a = document.createElement('a');
+        a.href = item.href; a.textContent = item.label;
+        li.append(a);
+      } else {
+        li.textContent = item.label;
+        li.setAttribute('aria-current', 'page');
+      }
+      return li;
+    }));
   }
-  return async input => {
-    cancel();
-    const current = revision;
-    active = new AbortController();
-    const controller = active;
+
+  return async (input, trailInput = []) => {
+    const controller = new AbortController();
     let timedOut = false;
     const timer = setTimeout(() => { timedOut = true; controller.abort(); }, 15000);
-    stage.replaceChildren(); controls.forEach(b => { b.disabled = true; });
-    host.querySelectorAll('[data-link]').forEach(a => a.removeAttribute('href'));
+    controls.forEach(b => { b.disabled = true; });
     status.textContent = 'Loading diagram…';
     try {
       const url = diagramURL(input);
+      const trail = trailInput.map(p => relPath(diagramURL(p)));
+      const current = relPath(url);
       title.textContent = decodeURIComponent(url.pathname.split('/').pop());
-      const direct = new URL('viewer/', root);
-      direct.searchParams.set('diagram', url.pathname.slice(root.pathname.length));
-      host.querySelector('[data-link="direct"]').href = direct.href;
+      document.title = `${title.textContent} – Flow viewer`;
+      renderCrumbs(trail, current);
       host.querySelector('[data-link="source"]').href = url.href;
       const [source, mermaid] = await Promise.all([fetchDiagram(url, controller.signal), renderer()]);
-      if (current !== revision) return;
       const { svg } = await mermaid.render(`flow-svg-${++nextId}`, source);
-      if (current !== revision) return;
       if (timedOut) throw new Error('Loading timed out. Please try again.');
       // Mermaid sanitizes its SVG in strict mode; do not bind diagram callbacks.
       stage.innerHTML = svg;
-      navigation = panZoom(stage, stage.querySelector('svg'), controller.signal);
+      const open = target => {
+        const sub = subflowOf(target);
+        if (sub && sub !== current) location.assign(viewerURL(sub, [...trail, current]).href);
+      };
+      stage.querySelectorAll('g.node').forEach(node => {
+        if (!subflowOf(node)) return;
+        node.classList.add('flow-subflow');
+        node.setAttribute('tabindex', '0');
+        node.setAttribute('role', 'link');
+        node.addEventListener('keydown', e => { if (e.key === 'Enter') open(node); });
+      });
+      navigation = panZoom(stage, stage.querySelector('svg'), controller.signal,
+        target => { const node = target?.closest('g.node'); if (node) open(node); });
       controls.forEach(b => { b.disabled = false; });
       status.textContent = '';
     } catch (error) {
-      if (current !== revision) return;
       status.textContent = timedOut ? 'Loading timed out. Please try again.' : `Unable to show diagram: ${error.message}`;
     } finally { clearTimeout(timer); }
   };
@@ -156,25 +197,20 @@ function createViewer(host, modal = false) {
 
 const page = document.getElementById('flow-viewer-page');
 if (page) {
-  const load = createViewer(page);
-  load(new URL(location.href).searchParams.get('diagram') || 'flows/project.mmd');
+  const params = new URL(location.href).searchParams;
+  const trail = (params.get('trail') || '').split(',').filter(Boolean);
+  createViewer(page)(params.get('diagram') || 'flows/project.mmd', trail);
 }
 
-let dialog, loadPopup;
+// Open diagram links in the viewer page, in the same window.
 document.addEventListener('click', event => {
-  if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+  if (page || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
   const link = event.target.closest('a[href]');
   if (!link || link.hasAttribute('download') || (link.target && link.target !== '_self')) return;
   let url;
   try { url = diagramURL(link.href); } catch { return; }
   event.preventDefault();
-  if (!dialog) {
-    dialog = document.createElement('dialog');
-    document.body.append(dialog);
-    loadPopup = createViewer(dialog, true);
-  }
-  dialog.showModal();
-  loadPopup(url);
+  location.assign(viewerURL(relPath(url)).href);
 });
 
 // Preserve the repository's existing fenced Mermaid support.
