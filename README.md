@@ -118,6 +118,11 @@ limit and a 15-second loading timeout. Mermaid uses strict security and diagram
 callbacks are disabled. Existing fenced Mermaid blocks still render. The timeout
 can abort network requests but cannot preempt synchronous browser rendering.
 
+## Contributing
+
+Ideas, bug reports and improvements are welcome. See
+[CONTRIBUTING.md](CONTRIBUTING.md) and our [Code of Conduct](CODE_OF_CONDUCT.md).
+
 ## License
 
 See [LICENSE](LICENSE).
