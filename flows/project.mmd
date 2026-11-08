@@ -1,15 +1,15 @@
 flowchart TD
     start([Start or resume project]) --> restore[Validate index, workflow version, records and evidence]
 %% @airflow-context restore
-%% Initialize missing .air/ using the global instructions. On resume,
+%% Initialize missing .air/ using `reference/workspace.md` (relative to airflow.md). On resume, follow `reference/resume.md`;
 %% validate the saved node and call stack, then continue that exact pending step;
 %% the entry decision below is for runs without an active saved position.
 %% Do not replay Concept or choose a phase from artifact existence alone.
 
 %% # Workflow revision: explicit orchestration and self-review
 
-%% This revision changes transition semantics. Existing runs must follow the global instructions'
-%% Resume validation rules and receive user authorization before changing versions.
+%% This revision changes transition semantics. Existing runs must follow
+%% `reference/resume.md` and receive user authorization before changing versions.
 %% Retain the old source and call stack until the pending work is reconciled.
 
 %% - Old position; New position / required reconciliation
@@ -40,8 +40,8 @@ flowchart TD
 %% free of mutable statuses. Migrate one release status per version from evidence;
 %% never interpret Design `approved` as release `published` or record approval as
 %% release lifecycle. Preserve historical events. Conflicting legacy statuses require
-%% reconciliation before resuming. Apply the global instructions' user-authorized version
-%% migration rules; do not silently migrate an active run.
+%% reconciliation before resuming. Apply the user-authorized version
+%% migration rules in `reference/resume.md`; do not silently migrate an active run.
 
 %% Workflow maintenance checks: new project; next release; nested resume; rejected
 %% Design; changed Definition; code/design defects; missing evidence or tracker

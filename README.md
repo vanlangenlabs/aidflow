@@ -75,7 +75,8 @@ records in a `.air/` folder in **your** repository (not in this one).
 
 | Path | Audience | Description |
 | --- | --- | --- |
-| [`airflow.md`](airflow.md) | AI agent | The operating instructions: rules, statuses, approvals, resume and interaction protocol |
+| [`airflow.md`](airflow.md) | AI agent | The core operating instructions: entry point, rules, authority and a short status overview. Always loaded |
+| [`reference/*.md`](https://github.com/vanlangenlabs/airflow/tree/main/reference) | AI agent | Detailed rules loaded only when needed: statuses, approvals, workspace templates, resume validation and the interaction protocol |
 | [`flows/*.mmd`](https://github.com/vanlangenlabs/airflow/tree/main/flows) | AI agent & humans | The workflow itself, as Mermaid flowcharts with embedded node context |
 | [`copilot-instructions.md`](copilot-instructions.md) | You | Snippet to hook AIRFlow into GitHub Copilot |
 
