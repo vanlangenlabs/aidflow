@@ -8,8 +8,6 @@ last session, or declare work "done" without evidence. AIRFlow gives an agent
 a clear process to follow, with explicit places where it must stop and ask a
 human.
 
-> 🔍 **Explore the workflow visually:** <https://airflow.vanlangen.org>
-
 ## Why AIRFlow?
 
 - **Predictable process** – the agent follows a defined flow instead of improvising.
