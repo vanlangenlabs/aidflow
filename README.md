@@ -63,6 +63,11 @@ before acting or resuming. It defines the workflow and links to its Mermaid flow
 If inaccessible, report the limitation and request an accessible copy; do not guess.
 ```
 
+**Starting a brand-new repository?** You can also paste this same text (without the
+`# AIRFlow` heading) as the first prompt when you jump-start a new repository with
+Copilot on GitHub. The agent then follows AIRFlow from the very first step, and you
+can add the file to `.github/copilot-instructions.md` afterwards to keep it in place.
+
 The agent then reads `airflow.md`, follows `flows/project.mmd`, and keeps its
 records in a `.air/` folder in **your** repository (not in this one).
 
