@@ -109,8 +109,9 @@ Keep Pages building from the repository root. `index.html` is the standalone
 homepage, styled by `assets/viewer.css` and powered by `assets/viewer.js`.
 `index.json` defines workflow navigation. Relative paths support custom domains
 and project-site paths. `viewer.html` provides the compatibility redirect.
-No additional build step or Jekyll plugin is needed. The `oldwebsite/` reference
-copy is excluded from the Pages build.
+No additional build step or Jekyll plugin is needed. `assets/documentation.js`
+renders inline diagrams in the Markdown documentation and routes diagram links
+to the HTML viewer.
 
 The viewer loads pinned Mermaid 11.12.0 from jsDelivr and fonts from Google Fonts.
 Internet access is required for these external assets. Loading and rendering
