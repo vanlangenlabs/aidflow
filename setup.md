@@ -35,7 +35,7 @@ user's behalf.
    the pull request and stop.
    - If the project purpose is not already clear, first ask what the project
      should do or what problem it should solve.
-   - Follow the Question protocol and the Concept phase example to identify other
+   - Follow the Question protocol and `reference/concept-example.md` to identify other
      missing information. Ask only focused questions needed to fill
      `.aidflow/concept.md`.
 5. Record the unanswered questions and next action as a pending interaction in

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AIDFlow">
+  <defs>
+    <linearGradient id="w" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5fe3f7"/>
+      <stop offset="1" stop-color="#1fa0d8"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#w)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 18C16 8 26 8 34 15S50 22 57 12"/>
+    <path d="M8 34C16 24 26 24 34 31S50 38 57 28"/>
+    <path d="M12 50C19 41 28 41 35 47S47 53 53 45"/>
+  </g>
+</svg>

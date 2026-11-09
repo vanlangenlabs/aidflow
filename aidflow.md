@@ -131,6 +131,8 @@ file when its trigger occurs, and again if you are unsure of its rules.
 | File | Read when |
 | --- | --- |
 | [`reference/interaction.md`](reference/interaction.md) | Asking a question, presenting an artifact for review, requesting or recording approval, or handling an incomplete answer |
+| [`reference/interaction-record.md`](reference/interaction-record.md) | Saving a pending interaction that outlives the session, or resuming one |
+| [`reference/concept-example.md`](reference/concept-example.md) | Asking a new project's first Concept questions |
 | [`reference/approvals.md`](reference/approvals.md) | Recording, invalidating or checking a human approval |
 | [`reference/statuses.md`](reference/statuses.md) | Changing or interpreting any record, feature, release or execution status |
 | [`reference/workspace.md`](reference/workspace.md) | Initializing `.aidflow/` or editing `.aidflow/index.md` structure |
