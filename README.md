@@ -86,37 +86,36 @@ deliberately dense. For a human-friendly view, use the
 
 ## Viewing the diagrams
 
-- **On GitHub Pages:** clicking a `.mmd` link opens the flow in the viewer, in the
-  same window. A breadcrumb at the top (Documentation › Project › Concept …) shows
-  where you came from and links back. Click a subflow node in a diagram to open it.
-  Zoom with the buttons or mouse wheel and drag to pan; Reset fits the diagram again.
-- **Direct viewer:** [Project flow](viewer/?diagram=flows/project.mmd). Use
-  `viewer/?diagram=flows/concept.mmd` for another flow. Without a parameter, Project opens.
-- **Source:** the Source link opens the original `.mmd` file. No per-flow Markdown
-  wrapper or generated diagram is needed.
-- **On GitHub:** GitHub renders `.mmd` files directly when you open them, e.g. [`flows/project.mmd`](flows/project.mmd). Note that `%%` comments (node context) are not shown in the rendered diagram; use the *Code* view to read them.
+The [website](https://airflow.vanlangen.org) opens the HTML workflow viewer.
+Choose a workflow in the sidebar or follow a phase node in a diagram. Nodes with
+embedded context open an explanation dialog, with a link to the phase diagram
+where applicable. Breadcrumbs and browser Back/Forward support navigation.
+
+Zoom with the buttons or mouse wheel and drag to pan; Reset fits the diagram.
+The viewer includes light and dark themes, a collapsible Mermaid source panel,
+source copying and downloads. **Get started** provides setup instructions for
+Copilot, Codex and Claude Code, plus the Copilot Jumpstart prompt.
+
+- Direct links use `?flow=project` or `?flow=concept` on the website root.
+- Existing `/viewer/?diagram=flows/concept.mmd` links still work: `/viewer/`
+  redirects to the HTML viewer and preserves the selected diagram.
+- Original sources remain in `flows/*.mmd`; the current instructions and
+  `reference/` rules remain available to agents.
+- Markdown documentation retains the Primer theme and its diagram links.
 
 ### GitHub Pages integration
 
-The existing Primer theme loads `_includes/head-custom.html`, which includes the
-viewer CSS and JavaScript. `viewer.html` uses the same default layout. Keep Pages
-building from the repository root, as in the existing deployment. No new Jekyll
-plugin, theme, or build step is required. Asset URLs use `relative_url`, and the
-JavaScript derives the site root from its own URL, supporting custom domains and
-project sites such as `/AIRFlow/`.
+Keep Pages building from the repository root. `index.html` is the standalone
+homepage, styled by `assets/viewer.css` and powered by `assets/viewer.js`.
+`index.json` defines workflow navigation. Relative paths support custom domains
+and project-site paths. `viewer.html` provides the compatibility redirect.
+No additional build step or Jekyll plugin is needed. The `oldwebsite/` reference
+copy is excluded from the Pages build.
 
-The diagrams remain the original `flows/*.mmd` files. Ordinary Markdown links such
-as `[Concept](flows/concept.mmd)` work unchanged on Pages. Relative links resolve
-against the containing page. Explicit downloads, new-tab links, and modified
-clicks keep normal browser behavior. Link interception runs on Pages, not on
-GitHub's own repository interface.
-
-The viewer loads pinned Mermaid 11.12.0 from jsDelivr. Internet access to that CDN
-is required; loading/render errors are displayed. Only same-origin `.mmd` URLs
-inside `flows/` are fetched, without credentials or redirects, with a 256 KiB
-limit and a 15-second loading timeout. Mermaid uses strict security and diagram
-callbacks are disabled. Existing fenced Mermaid blocks still render. The timeout
-can abort network requests but cannot preempt synchronous browser rendering.
+The viewer loads pinned Mermaid 11.12.0 from jsDelivr and fonts from Google Fonts.
+Internet access is required for these external assets. Loading and rendering
+errors appear in the viewer. Diagrams use Mermaid's strict security mode;
+node context is inserted as text with basic Markdown formatting.
 
 ## Contributing
 

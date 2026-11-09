@@ -1,3 +1,5 @@
 theme: jekyll-theme-primer
 title: AIRFlow
 description: A structured, human-approved development workflow for AI coding agents
+exclude:
+  - oldwebsite
