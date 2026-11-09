@@ -89,9 +89,15 @@ function flowUrl(name, ancestors = []) {
   return url;
 }
 
+function isHome() {
+  const params = new URLSearchParams(location.search);
+  return !params.has('flow') && !params.has('diagram');
+}
+
 function updateTreeSelection() {
+  const home = isHome();
   byId('workflow-tree').querySelectorAll('a[data-flow]').forEach((link) => {
-    const current = link.dataset.flow === flowName;
+    const current = !home && link.dataset.flow === flowName;
     if (current) {
       link.setAttribute('aria-current', 'page');
       let branch = link.closest('details');
@@ -413,6 +419,11 @@ async function loadInstructions() {
 }
 
 async function loadFlow(name) {
+  const home = isHome();
+  byId('intro').hidden = !home;
+  document.querySelector('.workspace').hidden = home;
+  byId('source-panel').hidden = home;
+  if (home && source && flowName === name) { updateTreeSelection(); return; }
   const id = ++requestId;
   if (controller) controller.abort();
   source = '';
@@ -589,25 +600,14 @@ gettingStarted.addEventListener('click', (event) => {
   if (event.target === gettingStarted) gettingStarted.close();
 });
 
-const welcome = byId('welcome-dialog');
-const welcomeSeenKey = 'aidflow-welcome-seen';
-function dismissWelcome() { welcome.close(); }
-byId('open-welcome').addEventListener('click', () => welcome.showModal());
-byId('close-welcome').addEventListener('click', dismissWelcome);
-byId('welcome-explore').addEventListener('click', dismissWelcome);
-byId('welcome-setup').addEventListener('click', () => {
-  welcome.close();
-  gettingStarted.showModal();
+byId('open-welcome').addEventListener('click', () => {
+  history.pushState(null, '', location.pathname);
+  loadFlow(selectedFlow());
 });
-welcome.addEventListener('click', (event) => {
-  if (event.target === welcome) welcome.close();
+byId('welcome-explore').addEventListener('click', () => {
+  history.pushState(null, '', flowUrl('project').href);
+  loadFlow('project');
 });
-// Native dialog Escape handling closes the introduction as well.
-let hasSeenWelcome = false;
-try { hasSeenWelcome = localStorage.getItem(welcomeSeenKey) === 'true'; } catch {}
-if (!hasSeenWelcome) {
-  welcome.showModal();
-  try { localStorage.setItem(welcomeSeenKey, 'true'); } catch {}
-}
+byId('welcome-setup').addEventListener('click', () => gettingStarted.showModal());
 
 Promise.all([loadNavigation(), loadInstructions()]).then(() => loadFlow(selectedFlow()));

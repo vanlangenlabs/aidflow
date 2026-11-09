@@ -164,9 +164,8 @@ footer { display: flex; justify-content: space-between; gap: 16px; color: var(--
   footer { flex-wrap: wrap; }
 }
 @media (prefers-reduced-motion: reduce) { .theme-switch input::after { transition: none; } }
-#welcome-dialog { width: min(900px, calc(100% - 32px)); }
-#welcome-dialog .welcome-image { display: block; width: 100%; height: auto; margin: 4px auto 16px; border-radius: 6px; }
-#welcome-dialog p { color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+
 .welcome-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 .welcome-actions button { padding: 10px 14px; }
 
@@ -177,3 +176,8 @@ footer { display: flex; justify-content: space-between; gap: 16px; color: var(--
 
 .agent-choice { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 18px 0; color: var(--ink); }
 .agent-choice select { max-width: 100%; padding: 8px 12px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); color: var(--ink); font: inherit; }
+.intro { max-width: 960px; margin: 0 auto; padding: 8px 0 40px; }
+.intro[hidden] { display: none; }
+.intro h2 { font: 600 24px 'DM Sans', sans-serif; margin-bottom: 14px; }
+.intro p { color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
+.intro .welcome-image { display: block; width: 100%; height: auto; margin: 16px 0; border-radius: 6px; }
