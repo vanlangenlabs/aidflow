@@ -588,7 +588,7 @@ async function copyAIReference() {
 }
 
 aiCopyButtons.forEach((button) => button.addEventListener('click', copyAIReference));
-byId('get-started').addEventListener('click', () => gettingStarted.showModal());
+byId('get-started').addEventListener('click', () => { updateSetupMethod(); updateAgentSetup(); gettingStarted.showModal(); });
 byId('close-get-started').addEventListener('click', () => gettingStarted.close());
 gettingStarted.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
@@ -608,6 +608,6 @@ byId('welcome-explore').addEventListener('click', () => {
   history.pushState(null, '', flowUrl('project').href);
   loadFlow('project');
 });
-byId('welcome-setup').addEventListener('click', () => gettingStarted.showModal());
+byId('welcome-setup').addEventListener('click', () => { updateSetupMethod(); updateAgentSetup(); gettingStarted.showModal(); });
 
 Promise.all([loadNavigation(), loadInstructions()]).then(() => loadFlow(selectedFlow()));

@@ -82,7 +82,7 @@
       <div class="ai-context">
         <p>AIDFlow helps developers and teams give AI coding agents a clear development process. The agent follows the flows; you approve key decisions.</p>
         <label class="agent-choice" for="setup-method">How are you starting?
-          <select id="setup-method" aria-controls="setup-existing setup-jumpstart">
+          <select id="setup-method" autocomplete="off" aria-controls="setup-existing setup-jumpstart">
             <option value="existing">Add AIDFlow to a repository</option>
             <option value="jumpstart">GitHub Copilot Jumpstart</option>
           </select>
@@ -90,7 +90,7 @@
         <section id="setup-existing" aria-labelledby="existing-title">
         <h3 id="existing-title">Add AIDFlow to a repository</h3>
         <label class="agent-choice" for="agent-select">Your coding agent
-          <select id="agent-select">
+          <select id="agent-select" autocomplete="off">
             <option value="copilot">GitHub Copilot</option>
             <option value="codex">OpenAI Codex</option>
             <option value="claude">Claude Code</option>
