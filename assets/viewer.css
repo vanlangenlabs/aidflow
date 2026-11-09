@@ -180,4 +180,4 @@ footer { display: flex; justify-content: space-between; gap: 16px; color: var(--
 .intro[hidden] { display: none; }
 .intro h2 { font: 600 24px 'DM Sans', sans-serif; margin-bottom: 14px; }
 .intro p { color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
-.intro .welcome-image { display: block; width: 100%; height: auto; margin: 16px 0; border-radius: 6px; }
+.intro .welcome-image { display: block; width: 80%; height: auto; margin: 16px auto; border-radius: 6px; }
