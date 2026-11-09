@@ -38,6 +38,9 @@ Include, where possible:
   repeating it in another flow or file.
 - **Keep node IDs stable.** If an ID must change, document an old-to-new mapping
   in the workflow notes in `flows/project.mmd`.
+- **Keep the setup copy list in sync.** `setup.md` lists every file copied into a
+  consuming repository's `.aidflow/method/`. Update it when you add, rename or
+  remove a flow or reference file.
 - **Core vs reference.** Keep `aidflow.md` small and always-needed. Put detailed,
   situational rules in `reference/` and add its trigger to the table in `aidflow.md`.
 - **Keep it readable for an AI.** Be explicit and unambiguous, and keep each step

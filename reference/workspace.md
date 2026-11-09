@@ -33,7 +33,7 @@ reuse an ID.
 # AIDFlow project index
 
 ## Workflow source
-- entry: <aidflow.md source URL or repository-relative path>
+- entry: <`.aidflow/method/aidflow.md`, or the source URL when no local copy exists>
 
 | Source path | Role | Ref (commit/tag) | SHA-256 |
 | --- | --- | --- | --- |
@@ -80,6 +80,12 @@ Records or content files. Use `none` only for explicitly non-applicable fields.
 ```
 
 ## Workflow source registration
+
+In a consuming repository the method is a pinned local copy in `.aidflow/method/`,
+made at setup from one immutable source commit (see `setup.md`). Register every
+copied file in the index at setup with its relative path, the source commit and the
+SHA-256 of its exact bytes. The local copy is the source of truth for the run; the
+rules below apply when a copy or version must be established or compared.
 
 At initialization, prefer resolving the entry source to one immutable commit and
 record it; resolve tags to their commit when possible. Re-read the entry file at

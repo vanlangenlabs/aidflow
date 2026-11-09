@@ -54,27 +54,25 @@ approval gates and repair loops.)
 
 ## Using AIDFlow in your project
 
-Point your agent at [`aidflow.md`](aidflow.md). For GitHub Copilot, add this to
-your repository's `.github/copilot-instructions.md` (see
+Give your agent the text below, for example in a chat, in the Copilot Jumpstart
+prompt for a new repository, or in `.github/copilot-instructions.md` (see
 [`copilot-instructions.md`](copilot-instructions.md) for the template):
 
 ```markdown
 # AIDFlow
 
-For development work, read and follow https://raw.githubusercontent.com/vanlangenlabs/aidflow/main/aidflow.md
-before acting or resuming. It defines the workflow and links to its Mermaid flows.
-If the repository has no `.aidflow/` folder yet, first read and follow
+For development work, read and follow `.aidflow/method/aidflow.md` before acting or
+resuming. If that file does not exist yet, first read and follow
 https://raw.githubusercontent.com/vanlangenlabs/aidflow/main/setup.md.
-If inaccessible, report the limitation and request an accessible copy; do not guess.
+If a source is inaccessible, report the limitation and request an accessible copy; do not guess.
 ```
 
-**Starting a brand-new repository?** You can also paste this same text (without the
-`# AIDFlow` heading) as the first prompt when you jump-start a new repository with
-Copilot on GitHub. The agent then follows AIDFlow from the very first step, and you
-can add the file to `.github/copilot-instructions.md` afterwards to keep it in place.
-
-The agent then reads `aidflow.md`, follows `flows/project.mmd`, and keeps its
-records in a `.aidflow/` folder in **your** repository (not in this one).
+On first use the agent follows [`setup.md`](setup.md). It saves a pinned, unmodified
+copy of `aidflow.md`, the flows and the reference files in `.aidflow/method/` of
+**your** repository, adds the instruction above to your agent's instruction file, and
+initializes your project records in `.aidflow/`. From then on the agent works only
+from that local copy, so the method cannot change underneath a running project.
+Updating to a newer version is a deliberate, user-authorized step.
 
 ## Migrating an existing project
 
@@ -86,7 +84,7 @@ The workspace is now `.aidflow/`; preserve existing records and approval evidenc
 | Path | Audience | Description |
 | --- | --- | --- |
 | [`aidflow.md`](aidflow.md) | AI agent | The core operating instructions: entry point, rules, authority and a short status overview. Always loaded |
-| [`setup.md`](setup.md) | AI agent | One-time repository setup rules, used by the Copilot Jumpstart prompt. Hands over to `aidflow.md` |
+| [`setup.md`](setup.md) | AI agent | One-time repository setup: copies the method into `.aidflow/method/`, then hands over to `aidflow.md` |
 | [`reference/*.md`](https://github.com/vanlangenlabs/aidflow/tree/main/reference) | AI agent | Detailed rules loaded only when needed: statuses, approvals, workspace templates, resume validation and the interaction protocol |
 | [`flows/*.mmd`](https://github.com/vanlangenlabs/aidflow/tree/main/flows) | AI agent & humans | The workflow itself, as Mermaid flowcharts with embedded node context |
 | [`copilot-instructions.md`](copilot-instructions.md) | You | Snippet to hook AIDFlow into GitHub Copilot |

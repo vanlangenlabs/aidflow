@@ -99,9 +99,9 @@
         <ol>
           <li><a id="agent-download" href="copilot-instructions.md" download="copilot-instructions.md">Download the Copilot reference</a></li>
           <li><span id="agent-placement" aria-live="polite">Save it as <code>.github/copilot-instructions.md</code> in your repository.</span> If that file exists, add the reference to it; keep your existing instructions.</li>
-          <li>Ask your agent to use AIDFlow for your development task. It reads the online rules and retrieves the flows it needs.</li>
+          <li>Ask your agent to use AIDFlow for your development task. On first use it runs the one-time setup: it saves a pinned copy of the method in <code>.aidflow/method/</code> and keeps your project records in <code>.aidflow/</code>.</li>
         </ol>
-        <p>Your agent needs access to the linked files. You do not need to download the diagrams or set up this viewer.</p>
+        <p>Your agent needs access to the setup file once. You do not need to download the diagrams or set up this viewer.</p>
         </section>
         <section id="setup-jumpstart" aria-labelledby="jumpstart-title" hidden>
           <h3 id="jumpstart-title">New GitHub repository with Copilot</h3>
@@ -122,7 +122,7 @@
           <p id="jumpstart-copy-status" role="status" aria-live="polite"></p>
           <pre><code id="jumpstart-prompt">Set up this new repository to use AIDFlow. Do not assume or invent a product name, project idea, users, requirements or technical choices.
 
-Read https://raw.githubusercontent.com/vanlangenlabs/aidflow/main/setup.md and follow it. It links to aidflow.md and the flows; keep all sources on the same version. If you cannot access them, report the blocker instead of inventing the workflow.</code></pre>
+Read https://raw.githubusercontent.com/vanlangenlabs/aidflow/main/setup.md and follow it. It saves a pinned copy of the method in this repository; keep all sources on the same version. If you cannot access them, report the blocker instead of inventing the workflow.</code></pre>
           <p>If the cloud session stops while waiting for approval, continue in a new task with the same repository records. Some web-reading tools cannot process the MIME type GitHub Pages assigns to <code>.mmd</code> files; use a permitted text-download tool to read the original source. If retrieval remains unavailable, provide an accessible, consistent copy of the instructions and flows before proceeding.</p>
           <p><a href="https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-coding-agent" target="_blank" rel="noopener noreferrer">GitHub documentation: Copilot coding agent</a></p>
         </section>

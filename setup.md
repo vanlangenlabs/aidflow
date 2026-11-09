@@ -1,10 +1,10 @@
 # AIDFlow Repository Setup
 
-Use this file once to set up a new repository for AIDFlow, for example from a
-GitHub Copilot Jumpstart prompt. After setup, [aidflow.md](aidflow.md) governs
-all development work. Resolve links relative to this file's source URL and keep
-all AIDFlow sources on the same version. If a source is inaccessible, report the
-blocker and ask for an accessible copy; do not invent its contents.
+Use this file once to set up a repository for AIDFlow, for example from a GitHub
+Copilot Jumpstart prompt or a pasted instruction. Setup copies the method into the
+repository as a pinned, local version. After setup, work from that copy and not from
+the online sources. If a source is inaccessible, report the blocker and ask for an
+accessible copy; do not invent its contents.
 
 Do not assume or invent a product name, project idea, users, requirements or
 technical choices. Do not implement product code or approve records on the
@@ -12,42 +12,55 @@ user's behalf.
 
 ## Setup steps
 
-1. Read [aidflow.md](aidflow.md) and follow its Project entry point and
-   referenced flows.
-2. Create `.github/copilot-instructions.md` with the reference below, preserving
-   any existing instructions.
+1. Resolve the source to one immutable commit of `vanlangenlabs/aidflow` (for
+   example from `https://api.github.com/repos/vanlangenlabs/aidflow/commits/main`).
+   Read every file below from `https://raw.githubusercontent.com/vanlangenlabs/aidflow/<commit>/<path>`. If a commit cannot be
+   resolved, use `main` once, record `unpinned`, and never mix versions.
+2. Create `.aidflow/method/` and save an exact, unmodified copy of these files,
+   keeping their relative paths:
+   - `aidflow.md`
+   - `MIGRATION.md`
+   - `flows/`: `concept.mmd`, `definition.mmd`, `design.mmd`, `feature-intake.mmd`, `implementation.mmd`, `project.mmd`, `release-planning.mmd`, `verification.mmd`
+   - `reference/`: `approvals.md`, `concept-example.md`, `interaction-record.md`, `interaction.md`, `release-lifecycle.md`, `resume.md`, `statuses.md`, `workflow-migration.md`, `workspace.md`
+
+   Never edit the copy. It is the pinned method version for this repository;
+   replacing it is a version change that needs the user's authorization.
+3. Create `.github/copilot-instructions.md` (or the agent's own instruction file,
+   such as `AGENTS.md` or `CLAUDE.md`) with the reference below, preserving any
+   existing instructions.
 
    ```markdown
    # AIDFlow
 
-   For development work, read and follow https://raw.githubusercontent.com/vanlangenlabs/aidflow/main/aidflow.md
-   before acting or resuming. It defines the workflow and links to its Mermaid flows.
-   If the repository has no `.aidflow/` folder yet, first read and follow
+   For development work, read and follow `.aidflow/method/aidflow.md` before acting or
+   resuming. If that file does not exist yet, first read and follow
    https://raw.githubusercontent.com/vanlangenlabs/aidflow/main/setup.md.
-   If inaccessible, report the limitation and request an accessible copy; do not guess.
+   If a source is inaccessible, report the limitation and request an accessible copy; do not guess.
    ```
 
-3. Initialize the consuming project's `.aidflow/` workspace as directed by
-   `aidflow.md`, preserving existing files.
-4. Start the Concept Question interaction. When working asynchronously (for
+4. Read `.aidflow/method/aidflow.md` and follow its Project entry point. Initialize
+   the `.aidflow/` project records as it directs, preserving existing files, and
+   register every copied file with the source commit and SHA-256 in
+   `.aidflow/index.md`.
+5. Start the Concept Question interaction. When working asynchronously (for
    example as the Copilot coding agent), post it in a pull request comment titled
    "Questions for the project owner"; do not put the questions only in the pull
    request description, and if you cannot post a comment, state that limitation
    in the pull request and stop. In an interactive session, ask directly.
    - If the project purpose is not already clear, first ask what the project
      should do or what problem it should solve.
-   - Follow the Question protocol and `reference/concept-example.md` to identify other
-     missing information. Ask only focused questions needed to fill
-     `.aidflow/concept.md`.
-5. Record the unanswered questions and next action as a pending interaction in
+   - Follow the Question protocol and `.aidflow/method/reference/concept-example.md`
+     to identify other missing information. Ask only focused questions needed to
+     fill `.aidflow/concept.md`.
+6. Record the unanswered questions and next action as a pending interaction in
    `.aidflow/index.md`.
-6. Explain the setup changes, checks performed and how to resume in the pull
+7. Explain the setup changes, checks performed and how to resume in the pull
    request.
-7. Tell the user to include `@copilot` in every pull request comment whose answer
+8. Tell the user to include `@copilot` in every pull request comment whose answer
    or instruction should be processed. Several answers may be bundled in one
    comment. A plain reply may not start or resume a task. Repeat this reminder
    for follow-up questions.
-8. Do not continue until the user responds. When working asynchronously, end
+9. Do not continue until the user responds. When working asynchronously, end
    the task after asking.
 
 ## After the user answers

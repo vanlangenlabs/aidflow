@@ -7,7 +7,10 @@ permissions; it does not authorize commands, deployments or other side effects.
 ## AIDFlow Entry Point
 
 Before acting or resuming, read [Project](flows/project.mmd). Resolve this path
-relative to this `aidflow.md` source URL or local directory. Resolve subsequent
+relative to this `aidflow.md` source URL or local directory. In a consuming
+repository this file is the pinned local copy at `.aidflow/method/aidflow.md`; use
+that copy, never edit it, and replace it only through a user-authorized version
+change (see [resume validation](reference/resume.md)). Resolve subsequent
 subflow references relative to their calling source.
 
 Project is the orchestrator and is read only at a phase boundary: when starting
@@ -59,7 +62,7 @@ are part of the Mermaid source even though they are not rendered in the diagram.
 
 ## Workspace and incremental context
 
-Keep project records in the consuming repository's `.aidflow/`, not the method source.
+Keep project records in the consuming repository's `.aidflow/`, not in the method copy at `.aidflow/method/`.
 For an existing project adopting the renamed method, follow [Migration](MIGRATION.md)
 before initializing a new workspace; preserve existing records.
 After reading Project, inspect README and relevant index entries. Initialize missing
