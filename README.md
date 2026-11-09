@@ -1,3 +1,4 @@
+
 # AIRFlow
 
 **A structured, human-approved development workflow for AI coding agents.**
@@ -8,8 +9,7 @@ last session, or declare work "done" without evidence. AIRFlow gives an agent
 a clear process to follow, with explicit places where it must stop and ask a
 human.
 
-[<img width="1536" height="1024" alt="From Chat Chaos to AIRFlow Clarity" src="https://github.com/user-attachments/assets/35dd1fc0-fe40-4af6-8f44-6a2f595a895f" />
-](https://airflow.vanlangen.org)
+[<img width="1536" height="1024" alt="AIDFlow" src="https://github.com/user-attachments/assets/e419298c-cc10-4b62-9ef4-a8d2fcf4d0e2" />](https://aidflow.vanlangen.org)
 
 ## Why AIRFlow?
 
