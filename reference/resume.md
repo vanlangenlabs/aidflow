@@ -31,7 +31,7 @@ approvals, or infer current state from a tracker, branch name, issue order or ar
 
 If the shared workflow version changed, do not silently replace the recorded ref.
 Compare old and new sources, including changed reference rules, and any node-ID
-migration map. A user must authorize
+migration map in [workflow migration](workflow-migration.md). A user must authorize
 resuming under the new version. Set execution to `waiting-human` during this decision.
 Preserve the old ref and record a migration event.
 If transition, criteria or approval-gate semantics changed, invalidate dependent

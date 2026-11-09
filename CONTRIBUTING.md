@@ -43,8 +43,12 @@ Include, where possible:
 - **Keep it readable for an AI.** Be explicit and unambiguous, and keep each step
   short. Never weaken an approval gate for convenience.
 - **Check the transitions.** If you change a transition or an approval gate, walk
-  through the "Workflow maintenance checks" listed in `flows/project.mmd`, and
-  update them if needed.
+  through these maintenance checks, and update them if needed: new project; next
+  release; nested resume; rejected Design; changed Definition; code/design defects;
+  missing evidence or tracker conflict; workflow migration; verified feature repair;
+  Design revision with reuse; removed, deferred and cancelled scope; index
+  initialization without self-hashing; changed reference rules on resume; partial
+  and sufficient answers in Definition and Design.
 - **Test with a real run.** Try the change on a small task with an agent and note
   what you observed in the pull request.
 - **Valid Mermaid.** Make sure changed `.mmd` files still render, for example in

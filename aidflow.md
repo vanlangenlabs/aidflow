@@ -8,7 +8,13 @@ permissions; it does not authorize commands, deployments or other side effects.
 
 Before acting or resuming, read [Project](flows/project.mmd). Resolve this path
 relative to this `aidflow.md` source URL or local directory. Resolve subsequent
-subflow references relative to their calling source. Keep this file, the
+subflow references relative to their calling source.
+
+Project is the orchestrator and is read only at a phase boundary: when starting
+or resuming, and when a subflow returns an outcome that Project must route. While
+inside a subflow, follow that subflow and its embedded context; do not reread
+Project or other phases. Record the call stack and pending node in the index so
+Project can be re-entered exactly. Keep this file, the
 [reference files](#reference-files) and all flows from the same source version;
 never combine a pinned source with latest flows.
 
@@ -129,6 +135,8 @@ file when its trigger occurs, and again if you are unsure of its rules.
 | [`reference/statuses.md`](reference/statuses.md) | Changing or interpreting any record, feature, release or execution status |
 | [`reference/workspace.md`](reference/workspace.md) | Initializing `.aidflow/` or editing `.aidflow/index.md` structure |
 | [`reference/resume.md`](reference/resume.md) | Resuming a run or when the workflow version changed |
+| [`reference/workflow-migration.md`](reference/workflow-migration.md) | The workflow version changed and node or status reconciliation is needed |
+| [`reference/release-lifecycle.md`](reference/release-lifecycle.md) | Changing a release status, assessing change impact at Project's impact node, or choosing a repair route |
 
 If a required reference file is inaccessible, report the limitation and ask for an
 accessible copy; do not guess its rules.
