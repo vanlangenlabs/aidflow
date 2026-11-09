@@ -8,7 +8,8 @@ last session, or declare work "done" without evidence. AIRFlow gives an agent
 a clear process to follow, with explicit places where it must stop and ask a
 human.
 
-[AIRFlow website](https://airflow.vanlangen.org)
+[<img width="1536" height="1024" alt="From Chat Chaos to AIRFlow Clarity" src="https://github.com/user-attachments/assets/35dd1fc0-fe40-4af6-8f44-6a2f595a895f" />
+](https://airflow.vanlangen.org)
 
 ## Why AIRFlow?
 
