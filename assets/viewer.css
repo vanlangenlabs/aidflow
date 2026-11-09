@@ -140,6 +140,9 @@ dialog pre { border: 1px solid var(--line); border-radius: 4px; background: var(
 #ai-copy-status:empty { display: none; }
 footer { display: flex; justify-content: space-between; gap: 16px; color: var(--muted); padding-block: 25px; font-size: 11px; }
 .footer-dot { color: #b55e47; padding-inline: 8px; }
+.footer-end { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; }
+.footer-github, .footer-link { display: inline-flex; align-items: center; gap: 6px; color: inherit; font-weight: 600; text-decoration: none; }
+.footer-github:hover, .footer-github:focus-visible, .footer-link:hover, .footer-link:focus-visible { color: #b55e47; text-decoration: underline; }
 @media (max-width: 800px) {
   .viewer-layout { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .sidebar nav { max-height: 240px; overflow: auto; }
