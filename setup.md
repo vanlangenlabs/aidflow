@@ -10,6 +10,15 @@ Do not assume or invent a product name, project idea, users, requirements or
 technical choices. Do not implement product code or approve records on the
 user's behalf.
 
+## Run setup only once
+
+Before changing anything, check whether this repository is already set up or setup
+is already in progress: `.aidflow/method/` or `.aidflow/index.md` exists, or an open
+pull request or branch already sets up AIDFlow. If so, do not start a second setup
+and do not open another pull request. Report where the existing setup is and,
+if it waits for an answer, point to that pull request and stop. Replacing the method
+is a version change that needs the user's authorization.
+
 ## Setup steps
 
 1. Resolve the source to one immutable commit of `vanlangenlabs/aidflow` (for
