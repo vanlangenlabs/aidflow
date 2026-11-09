@@ -74,10 +74,6 @@ initializes your project records in `.aidflow/`. From then on the agent works on
 from that local copy, so the method cannot change underneath a running project.
 Updating to a newer version is a deliberate, user-authorized step.
 
-## Migrating an existing project
-
-Existing users should follow [the migration guide](MIGRATION.md) before resuming.
-The workspace is now `.aidflow/`; preserve existing records and approval evidence.
 
 ## Repository contents
 

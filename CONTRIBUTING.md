@@ -48,7 +48,7 @@ Include, where possible:
 - **Check the transitions.** If you change a transition or an approval gate, walk
   through these maintenance checks, and update them if needed: new project; next
   release; nested resume; rejected Design; changed Definition; code/design defects;
-  missing evidence or tracker conflict; workflow migration; verified feature repair;
+  missing evidence or tracker conflict; verified feature repair;
   Design revision with reuse; removed, deferred and cancelled scope; index
   initialization without self-hashing; changed reference rules on resume; partial
   and sufficient answers in Definition and Design.

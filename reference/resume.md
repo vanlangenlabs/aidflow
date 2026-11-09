@@ -29,11 +29,6 @@ If a source, record or index check cannot be completed, set execution status to 
 mismatch and ask how to reconcile it. Do not skip nodes, reconstruct missing
 approvals, or infer current state from a tracker, branch name, issue order or artifact.
 
-If the shared workflow version changed, do not silently replace the recorded ref.
-Compare old and new sources, including changed reference rules, and any node-ID
-migration map in [workflow migration](workflow-migration.md). A user must authorize
-resuming under the new version. Set execution to `waiting-human` during this decision.
-Preserve the old ref and record a migration event.
-If transition, criteria or approval-gate semantics changed, invalidate dependent
-approvals/evidence and resume at the earliest affected state. If compatibility is
-unclear, remain blocked and ask.
+If the method copy in `.aidflow/method/` differs from its registered digests, set
+execution to `blocked`, list the mismatch and ask. Never replace the copy; version
+migration is not supported.

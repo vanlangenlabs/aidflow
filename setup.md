@@ -19,9 +19,8 @@ user's behalf.
 2. Create `.aidflow/method/` and save an exact, unmodified copy of these files,
    keeping their relative paths:
    - `aidflow.md`
-   - `MIGRATION.md`
    - `flows/`: `concept.mmd`, `definition.mmd`, `design.mmd`, `feature-intake.mmd`, `implementation.mmd`, `project.mmd`, `release-planning.mmd`, `verification.mmd`
-   - `reference/`: `approvals.md`, `concept-example.md`, `interaction-record.md`, `interaction.md`, `release-lifecycle.md`, `resume.md`, `statuses.md`, `workflow-migration.md`, `workspace.md`
+   - `reference/`: `approvals.md`, `concept-example.md`, `interaction-record.md`, `interaction.md`, `release-lifecycle.md`, `resume.md`, `statuses.md`, `workspace.md`
 
    Never edit the copy. It is the pinned method version for this repository;
    replacing it is a version change that needs the user's authorization.

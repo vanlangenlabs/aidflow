@@ -5,8 +5,6 @@ flowchart TD
 %% validate the saved node and call stack, then continue that exact pending step;
 %% the entry decision below is for runs without an active saved position.
 %% Do not replay Concept or choose a phase from artifact existence alone.
-%% Workflow revisions and version migration: `reference/workflow-migration.md` (relative to aidflow.md),
-%% read only when the workflow version changed.
 %% @end-aidflow-context
     restore --> resume{Valid saved position?}
     resume -- Yes --> saved([Resume validated node and call stack])

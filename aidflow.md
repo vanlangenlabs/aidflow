@@ -9,8 +9,7 @@ permissions; it does not authorize commands, deployments or other side effects.
 Before acting or resuming, read [Project](flows/project.mmd). Resolve this path
 relative to this `aidflow.md` source URL or local directory. In a consuming
 repository this file is the pinned local copy at `.aidflow/method/aidflow.md`; use
-that copy, never edit it, and replace it only through a user-authorized version
-change (see [resume validation](reference/resume.md)). Resolve subsequent
+that copy and never edit or replace it; version migration is not supported. Resolve subsequent
 subflow references relative to their calling source.
 
 Project is the orchestrator and is read only at a phase boundary: when starting
@@ -63,8 +62,6 @@ are part of the Mermaid source even though they are not rendered in the diagram.
 ## Workspace and incremental context
 
 Keep project records in the consuming repository's `.aidflow/`, not in the method copy at `.aidflow/method/`.
-For an existing project adopting the renamed method, follow [Migration](MIGRATION.md)
-before initializing a new workspace; preserve existing records.
 After reading Project, inspect README and relevant index entries. Initialize missing
 files from the [workspace templates](reference/workspace.md); preserve existing records and ask before replacing
 conflicting content. Read only the active subflow, embedded context and relevant
@@ -140,7 +137,6 @@ file when its trigger occurs, and again if you are unsure of its rules.
 | [`reference/statuses.md`](reference/statuses.md) | Changing or interpreting any record, feature, release or execution status |
 | [`reference/workspace.md`](reference/workspace.md) | Initializing `.aidflow/` or editing `.aidflow/index.md` structure |
 | [`reference/resume.md`](reference/resume.md) | Resuming a run or when the workflow version changed |
-| [`reference/workflow-migration.md`](reference/workflow-migration.md) | The workflow version changed and node or status reconciliation is needed |
 | [`reference/release-lifecycle.md`](reference/release-lifecycle.md) | Changing a release status, assessing change impact at Project's impact node, or choosing a repair route |
 
 If a required reference file is inaccessible, report the limitation and ask for an
