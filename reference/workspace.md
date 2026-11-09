@@ -1,28 +1,28 @@
-# `.air/README.md` template
+# `.aidflow/README.md` template
 
 Initialize the project workspace with this notice, preserving any additional
-project instructions that do not conflict with [`airflow.md`](../airflow.md):
+project instructions that do not conflict with [`aidflow.md`](../aidflow.md):
 
 ```markdown
-# AIRFlow project workspace
+# AIDFlow project workspace
 
-This directory contains AI-managed project records used by AIRFlow. It is not a
+This directory contains AI-managed project records used by AIDFlow. It is not a
 general-purpose documentation folder.
 
-Do not edit these records directly. Ask the AIRFlow agent to update them through
+Do not edit these records directly. Ask the AIDFlow agent to update them through
 the workflow, then review and approve proposed changes before they are merged.
 
 Do not store secrets or credentials here.
 ```
 
-# `.air/index.md` inventory and resume template
+# `.aidflow/index.md` inventory and resume template
 
 The index is the canonical inventory and resume point, not a copy of the records.
 Use this structure and keep detailed content in its individual files.
-Never register `.air/index.md` in its own Records table or store its own file
+Never register `.aidflow/index.md` in its own Records table or store its own file
 digest inside it: updating that digest would change the file again. The index is
 validated through its structure, record/evidence consistency and available Git
-history; do not treat Git history as human approval. `.air/README.md` may be an
+history; do not treat Git history as human approval. `.aidflow/README.md` may be an
 operational record with a current digest and `record_status: none`.
 
 Use stable project-local IDs: `F-0001` for features, the user-visible version string
@@ -30,14 +30,14 @@ Use stable project-local IDs: `F-0001` for features, the user-visible version st
 reuse an ID.
 
 ```markdown
-# AIRFlow project index
+# AIDFlow project index
 
 ## Workflow source
-- entry: <airflow.md source URL or repository-relative path>
+- entry: <aidflow.md source URL or repository-relative path>
 
 | Source path | Role | Ref (commit/tag) | SHA-256 |
 | --- | --- | --- | --- |
-| <one row per airflow.md, flow or reference/*.md file read> | <source role> | <immutable ref or unpinned> | <digest or unknown> |
+| <one row per aidflow.md, flow or reference/*.md file read> | <source role> | <immutable ref or unpinned> | <digest or unknown> |
 
 ## Tracker integration
 - provider: <none|github|gitlab>
@@ -87,7 +87,7 @@ that ref before using it, so an earlier read from `main` is not mixed into the r
 Read all flows and reference
 files from that same version, including files first needed later in the run.
 Register each file when read, with its path, role, ref and SHA-256 of the exact
-bytes. This includes `airflow.md`, Project, each used subflow and each used
+bytes. This includes `aidflow.md`, Project, each used subflow and each used
 `reference/*.md`; do not load unused reference files just to populate the table.
 
 If an immutable ref is unavailable, record `unpinned` and the available digests.

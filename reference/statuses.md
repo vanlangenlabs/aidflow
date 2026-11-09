@@ -9,7 +9,7 @@ the workflow execution phase. Use only these values; do not invent new status la
 | --- | --- |
 | `draft` | AI or user is preparing a record. May transition to `pending-approval` or `withdrawn`. |
 | `pending-approval` | Exact content version is awaiting a human decision. May transition to `approved`, `draft` for requested changes, or `withdrawn`. |
-| `approved` | A human approved the recorded content digest. Content changes follow Change handling in [`airflow.md`](../airflow.md). |
+| `approved` | A human approved the recorded content digest. Content changes follow Change handling in [`aidflow.md`](../aidflow.md). |
 | `superseded` | Replaced by a newer record/version. Preserve the old file or history and its evidence. |
 | `withdrawn` | Explicitly withdrawn by the user. Do not resume it without a new user request. |
 
@@ -20,7 +20,7 @@ or existence of an artifact.
 
 ## Status ownership
 
-All mutable statuses live only in `.air/index.md`, never in the content files.
+All mutable statuses live only in `.aidflow/index.md`, never in the content files.
 Use separate tables so a release has exactly one lifecycle status:
 
 | Entity / index table | Field | Meaning |
@@ -45,7 +45,7 @@ For every approval-gated record, material revision or invalidated approval moves
 `approved -> draft`. Self-review then permits `draft -> pending-approval`; only
 explicit approval permits `pending-approval -> approved`. Requested changes move
 `pending-approval -> draft`. Preserve earlier versions and their approval events.
-Editorial descendants follow Change handling in [`airflow.md`](../airflow.md) without a new approval.
+Editorial descendants follow Change handling in [`aidflow.md`](../aidflow.md) without a new approval.
 
 A human may withdraw an active record (`draft`, `pending-approval` or `approved`)
 into `withdrawn`; reopening explicitly moves it to `draft`. Mark a historical

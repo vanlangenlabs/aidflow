@@ -1,31 +1,31 @@
 
-# AIRFlow
+# AIDFlow
 
 **A structured, human-approved development workflow for AI coding agents.**
 
 AI agents are great at writing code, but left alone they tend to skip steps:
 they start building before the problem is understood, forget what was decided
-last session, or declare work "done" without evidence. AIRFlow gives an agent
+last session, or declare work "done" without evidence. AIDFlow gives an agent
 a clear process to follow, with explicit places where it must stop and ask a
 human.
 
 [<img width="1536" height="1024" alt="AIDFlow" src="https://github.com/user-attachments/assets/e419298c-cc10-4b62-9ef4-a8d2fcf4d0e2" />](https://aidflow.vanlangen.org)
 
-## Why AIRFlow?
+## Why AIDFlow?
 
 - **Predictable process** – the agent follows a defined flow instead of improvising.
 - **Human in control** – concept, scope, design and release decisions need explicit approval. The agent never approves its own work.
-- **Resumable** – all decisions, status and evidence are stored in the project's `.air/` folder, so work can be picked up again in a new session or by another agent.
+- **Resumable** – all decisions, status and evidence are stored in the project's `.aidflow/` folder, so work can be picked up again in a new session or by another agent.
 - **Traceable** – changes to requirements or design invalidate only the approvals and verification they affect, and every step leaves evidence.
 - **Tool-agnostic** – plain Markdown and Mermaid files; no runtime, no dependencies. It works with any agent that can read files or fetch URLs.
 
-AIRFlow does not grant extra permissions. It always yields to your system,
+AIDFlow does not grant extra permissions. It always yields to your system,
 repository and organization instructions.
 
 ## How it works
 
 The process is described as [Mermaid](https://mermaid.js.org) flowcharts in
-[`flows/`](https://github.com/vanlangenlabs/airflow/tree/main/flows). The entry point is [`project.mmd`](flows/project.mmd), which
+[`flows/`](https://github.com/vanlangenlabs/aidflow/tree/main/flows). The entry point is [`project.mmd`](flows/project.mmd), which
 orchestrates the phases below. Each phase is its own subflow.
 
 | Phase | Flow | Purpose |
@@ -52,44 +52,49 @@ flowchart LR
 (This is a simplified overview; the real flows contain many more decisions,
 approval gates and repair loops.)
 
-## Using AIRFlow in your project
+## Using AIDFlow in your project
 
-Point your agent at [`airflow.md`](airflow.md). For GitHub Copilot, add this to
+Point your agent at [`aidflow.md`](aidflow.md). For GitHub Copilot, add this to
 your repository's `.github/copilot-instructions.md` (see
 [`copilot-instructions.md`](copilot-instructions.md) for the template):
 
 ```markdown
-# AIRFlow
+# AIDFlow
 
-For development work, read and follow https://raw.githubusercontent.com/vanlangenlabs/airflow/main/airflow.md
+For development work, read and follow https://raw.githubusercontent.com/vanlangenlabs/aidflow/main/aidflow.md
 before acting or resuming. It defines the workflow and links to its Mermaid flows.
 If inaccessible, report the limitation and request an accessible copy; do not guess.
 ```
 
 **Starting a brand-new repository?** You can also paste this same text (without the
-`# AIRFlow` heading) as the first prompt when you jump-start a new repository with
-Copilot on GitHub. The agent then follows AIRFlow from the very first step, and you
+`# AIDFlow` heading) as the first prompt when you jump-start a new repository with
+Copilot on GitHub. The agent then follows AIDFlow from the very first step, and you
 can add the file to `.github/copilot-instructions.md` afterwards to keep it in place.
 
-The agent then reads `airflow.md`, follows `flows/project.mmd`, and keeps its
-records in a `.air/` folder in **your** repository (not in this one).
+The agent then reads `aidflow.md`, follows `flows/project.mmd`, and keeps its
+records in a `.aidflow/` folder in **your** repository (not in this one).
+
+## Migrating an existing project
+
+Existing users should follow [the migration guide](MIGRATION.md) before resuming.
+The workspace is now `.aidflow/`; preserve existing records and approval evidence.
 
 ## Repository contents
 
 | Path | Audience | Description |
 | --- | --- | --- |
-| [`airflow.md`](airflow.md) | AI agent | The core operating instructions: entry point, rules, authority and a short status overview. Always loaded |
-| [`reference/*.md`](https://github.com/vanlangenlabs/airflow/tree/main/reference) | AI agent | Detailed rules loaded only when needed: statuses, approvals, workspace templates, resume validation and the interaction protocol |
-| [`flows/*.mmd`](https://github.com/vanlangenlabs/airflow/tree/main/flows) | AI agent & humans | The workflow itself, as Mermaid flowcharts with embedded node context |
-| [`copilot-instructions.md`](copilot-instructions.md) | You | Snippet to hook AIRFlow into GitHub Copilot |
+| [`aidflow.md`](aidflow.md) | AI agent | The core operating instructions: entry point, rules, authority and a short status overview. Always loaded |
+| [`reference/*.md`](https://github.com/vanlangenlabs/aidflow/tree/main/reference) | AI agent | Detailed rules loaded only when needed: statuses, approvals, workspace templates, resume validation and the interaction protocol |
+| [`flows/*.mmd`](https://github.com/vanlangenlabs/aidflow/tree/main/flows) | AI agent & humans | The workflow itself, as Mermaid flowcharts with embedded node context |
+| [`copilot-instructions.md`](copilot-instructions.md) | You | Snippet to hook AIDFlow into GitHub Copilot |
 
-`airflow.md` and the `.mmd` files are written for an AI to read, so they are
+`aidflow.md` and the `.mmd` files are written for an AI to read, so they are
 deliberately dense. For a human-friendly view, use the
-[viewer](https://airflow.vanlangen.org).
+[viewer](https://aidflow.vanlangen.org).
 
 ## Viewing the diagrams
 
-The [website](https://airflow.vanlangen.org) opens the HTML workflow viewer.
+The [website](https://aidflow.vanlangen.org) opens the HTML workflow viewer.
 Choose a workflow in the sidebar or follow a phase node in a diagram. Nodes with
 embedded context open an explanation dialog, with a link to the phase diagram
 where applicable. Breadcrumbs and browser Back/Forward support navigation.

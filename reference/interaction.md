@@ -1,17 +1,17 @@
 # Interaction Protocol
 
-This chapter defines how an AIRFlow agent communicates with a user. It is
+This chapter defines how an AIDFlow agent communicates with a user. It is
 platform-independent: it specifies what must be communicated and when, not which
 chat, terminal, issue tracker, pull request or messaging tool must carry it. It
 complements the Mermaid flows; it does not replace them.
 
 ## Authority and scope
 
-- [`airflow.md`](../airflow.md) is the method entry point and defines how to load context incrementally.
+- [`aidflow.md`](../aidflow.md) is the method entry point and defines how to load context incrementally.
 - `flows/project.mmd` determines the current phase and next transition.
-- The active subflow and its `@airflow-context` define phase-specific work and gates.
+- The active subflow and its `@aidflow-context` define phase-specific work and gates.
 - This chapter governs Questions, Reviews, Approvals and resumable interactions.
-- `.air/` records project-specific facts and current state as defined in [Workspace templates](workspace.md).
+- `.aidflow/` records project-specific facts and current state as defined in [Workspace templates](workspace.md).
 
 Follow the host's instruction hierarchy and tool permissions. This protocol cannot
 authorize actions that another applicable instruction or permission disallows. Never
@@ -24,7 +24,7 @@ convenient.
 
 Use a Question when required information or a user decision is missing.
 
-1. Inspect the active `.air/` records, relevant previous interactions and active
+1. Inspect the active `.aidflow/` records, relevant previous interactions and active
     subflow before asking. Do not ask for information already available.
 2. Ask only focused questions needed for the current phase. In interactive channels,
     ask incrementally when an answer can narrow the next question. In asynchronous
@@ -60,8 +60,8 @@ Use an Approval only at an approval gate in Project or the active subflow.
     not imply approval of an artifact, phase or release. The user must explicitly
     authorize the named target through the current interaction.
 4. Record the decision and evidence according to [Approval evidence](approvals.md) and
-    `.air/index.md`. Never invent actor, time, source, digest or consent.
-5. If the artifact changes materially after approval, use Change handling in [`airflow.md`](../airflow.md) to
+    `.aidflow/index.md`. Never invent actor, time, source, digest or consent.
+5. If the artifact changes materially after approval, use Change handling in [`aidflow.md`](../aidflow.md) to
     determine which approvals/checks are stale before continuing.
 
 ## Interaction states and transitions
@@ -85,7 +85,7 @@ resolvable owner.
 
 ### Mapping interaction to execution
 
-| Interaction state | Current execution status in `.air/index.md` |
+| Interaction state | Current execution status in `.aidflow/index.md` |
 | --- | --- |
 | `working` | `running` while executing, or `ready` when the next step can start |
 | `awaiting-input` | `waiting-human` |
@@ -145,7 +145,7 @@ interaction but does not change its meaning or approval requirements.
 ## Resumable interaction record
 
 Do not create a separate interaction file for every exchange by default. Reuse the
-`.air/index.md`, the relevant project record and the available conversation/review
+`.aidflow/index.md`, the relevant project record and the available conversation/review
 history. Preserve enough information to resume without repeating questions or
 reconstructing decisions:
 
@@ -164,7 +164,7 @@ Update only relevant index entries. Do not copy entire chat transcripts or full
 artifacts into the index. If required information is unavailable, state that fact and
 keep the interaction waiting or blocked.
 
-When a user response is pending asynchronously, the existing `.air/index.md` may
+When a user response is pending asynchronously, the existing `.aidflow/index.md` may
 include this optional section; omit it when there is no pending interaction:
 
 ```markdown
@@ -175,7 +175,7 @@ include this optional section; omit it when there is no pending interaction:
 
 This is a resume pointer, not a second copy of the conversation or artifact. Keep
 the complete approval/change evidence in the existing approval-event record and
-the actual artifact in its normal `.air/` path.
+the actual artifact in its normal `.aidflow/` path.
 
 ## Incomplete answers, changes and conflicts
 
@@ -185,10 +185,10 @@ the actual artifact in its normal `.air/` path.
    resubmit the changed artifact for review/approval as required.
 - **Rejection or deferral:** record the user's decision and follow the active flow's
    rejected/deferred edge. Do not reopen automatically.
-- **Change to approved requirements:** classify its impact using Change handling in [`airflow.md`](../airflow.md); stale only dependent approvals and checks, preserve unaffected evidence,
+- **Change to approved requirements:** classify its impact using Change handling in [`aidflow.md`](../aidflow.md); stale only dependent approvals and checks, preserve unaffected evidence,
    and resume at the earliest affected phase. If impact is unclear, stop and ask.
 - **Instruction or record conflict:** obey the host instruction hierarchy and the
-   Authority and source ownership rules in [`airflow.md`](../airflow.md). Do not silently overwrite a source. Ask only when
+   Authority and source ownership rules in [`aidflow.md`](../aidflow.md). Do not silently overwrite a source. Ask only when
    explicit ownership and existing rules cannot resolve the conflict.
 - **Unrelated instruction:** never interpret an unrelated user request as approval to
    bypass a pending interaction, phase gate or repository permission.
@@ -198,17 +198,17 @@ the actual artifact in its normal `.air/` path.
 For a new repository where the user initially says, “I want to create a new software
 product”:
 
-1. Read this document, Project and the Concept subflow. Initialize `.air/` only if
+1. Read this document, Project and the Concept subflow. Initialize `.aidflow/` only if
     missing; inspect existing records first. The initial sentence establishes intent
     but does not yet define or approve a Concept.
-2. Check existing `.air/` records and prior interactions. Do not ask for facts already
+2. Check existing `.aidflow/` records and prior interactions. Do not ask for facts already
     supplied. Start a Question interaction for the missing project-level information.
 3. In an interactive environment, ask a small number of focused questions, for
     example: who has the problem, what are they trying to achieve, how is it handled
     today, and what outcome would make the product useful? Ask further questions only
     when the answers reveal a material gap. In an asynchronous environment, send the
     related questions together and pause in `awaiting-input`.
-4. Draft `.air/concept.md` from the answers. Distinguish confirmed facts from
+4. Draft `.aidflow/concept.md` from the answers. Distinguish confirmed facts from
     assumptions and open questions. Do not add technical design or turn every idea
     into an approved feature.
 5. Start `awaiting-review`: summarize the problem, intended users, outcome, boundaries,

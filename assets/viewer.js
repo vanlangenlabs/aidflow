@@ -36,7 +36,7 @@ let drag = null;
 
 let theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 try {
-  const savedTheme = localStorage.getItem('airflow-theme');
+  const savedTheme = localStorage.getItem('aidflow-theme');
   if (savedTheme === 'light' || savedTheme === 'dark') theme = savedTheme;
 } catch {}
 document.documentElement.dataset.theme = theme;
@@ -174,12 +174,12 @@ function parseNodeContexts(text) {
   const contexts = new Map();
   let current = null;
   text.split(/\r?\n/).forEach((line) => {
-    const start = line.match(/^\s*%%\s*@airflow-context\s+([A-Za-z0-9_-]+)\s*$/);
+    const start = line.match(/^\s*%%\s*@aidflow-context\s+([A-Za-z0-9_-]+)\s*$/);
     if (start) {
       current = { id: start[1], lines: [] };
       return;
     }
-    if (/^\s*%%\s*@end-airflow-context\s*$/.test(line)) {
+    if (/^\s*%%\s*@end-aidflow-context\s*$/.test(line)) {
       if (current && !contexts.has(current.id)) contexts.set(current.id, current.lines.join('\n').trim());
       current = null;
       return;
@@ -326,7 +326,7 @@ function renderSource(id) {
         flowchart: { htmlLabels: false, useMaxWidth: false, curve: 'basis' },
         suppressErrorRendering: true
       });
-      const result = await window.mermaid.render(`airflow-diagram-${++renderId}`, source);
+      const result = await window.mermaid.render(`aidflow-diagram-${++renderId}`, source);
       if (id !== requestId) return;
       diagram.innerHTML = result.svg;
       const svg = diagram.querySelector('svg');
@@ -408,7 +408,7 @@ async function loadInstructions() {
     instructionTemplate = text;
     byId('instructions-status').hidden = true;
   } catch (error) {
-    byId('instructions-status').textContent = `Could not load the AIRFlow reference. ${error.message}`;
+    byId('instructions-status').textContent = `Could not load the AIDFlow reference. ${error.message}`;
   }
 }
 
@@ -463,7 +463,7 @@ async function loadFlow(name) {
     byId('download').disabled = false;
     byId('copy').disabled = false;
     if (instructionTemplate) {
-      byId('ai-reference').textContent = `${instructionTemplate.trimEnd()}\n\n## Selected Diagram (Context Only)\n\n${url.href}\n\nRead airflow.md first and enter through its Project link; this selected diagram is context only and must not override the configured source version.\n`;
+      byId('ai-reference').textContent = `${instructionTemplate.trimEnd()}\n\n## Selected Diagram (Context Only)\n\n${url.href}\n\nRead aidflow.md first and enter through its Project link; this selected diagram is context only and must not override the configured source version.\n`;
       aiCopyButtons.forEach((button) => { button.disabled = false; });
     }
     await renderSource(id);
@@ -493,7 +493,7 @@ window.addEventListener('popstate', () => loadFlow(selectedFlow()));
 themeSwitch.addEventListener('change', () => {
   theme = themeSwitch.checked ? 'dark' : 'light';
   document.documentElement.dataset.theme = theme;
-  try { localStorage.setItem('airflow-theme', theme); } catch {}
+  try { localStorage.setItem('aidflow-theme', theme); } catch {}
   if (source) renderSource(requestId);
 });
 byId('zoom-in').addEventListener('click', () => zoom(1.25));
@@ -590,7 +590,7 @@ gettingStarted.addEventListener('click', (event) => {
 });
 
 const welcome = byId('welcome-dialog');
-const welcomeSeenKey = 'airflow-welcome-seen';
+const welcomeSeenKey = 'aidflow-welcome-seen';
 function dismissWelcome() { welcome.close(); }
 byId('open-welcome').addEventListener('click', () => welcome.showModal());
 byId('close-welcome').addEventListener('click', dismissWelcome);

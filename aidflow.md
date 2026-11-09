@@ -1,13 +1,13 @@
-# AIRFlow AI Development Workflow
+# AIDFlow AI Development Workflow
 
 Use this workflow for software development work in this repository. It guides
 the process alongside this repository's other instructions and existing tool
 permissions; it does not authorize commands, deployments or other side effects.
 
-## AIRFlow Entry Point
+## AIDFlow Entry Point
 
 Before acting or resuming, read [Project](flows/project.mmd). Resolve this path
-relative to this `airflow.md` source URL or local directory. Resolve subsequent
+relative to this `aidflow.md` source URL or local directory. Resolve subsequent
 subflow references relative to their calling source. Keep this file, the
 [reference files](#reference-files) and all flows from the same source version;
 never combine a pinned source with latest flows.
@@ -44,8 +44,8 @@ for when each question, review or approval gate occurs.
 
 ## Node Context
 
-Any flow may include `%% @airflow-context <node-id>` comment blocks ending with
-`%% @end-airflow-context`. Read these as Markdown context for the matching
+Any flow may include `%% @aidflow-context <node-id>` comment blocks ending with
+`%% @end-aidflow-context`. Read these as Markdown context for the matching
 Mermaid node. Use them to understand the node's purpose, focus and expected
 outcome; they do not replace the referenced subflow or its approval decisions.
 Empty lines inside a context block separate Markdown paragraphs. These comments
@@ -53,7 +53,9 @@ are part of the Mermaid source even though they are not rendered in the diagram.
 
 ## Workspace and incremental context
 
-Keep project records in the consuming repository's `.air/`, not the method source.
+Keep project records in the consuming repository's `.aidflow/`, not the method source.
+For an existing project adopting the renamed method, follow [Migration](MIGRATION.md)
+before initializing a new workspace; preserve existing records.
 After reading Project, inspect README and relevant index entries. Initialize missing
 files from the [workspace templates](reference/workspace.md); preserve existing records and ask before replacing
 conflicting content. Read only the active subflow, embedded context and relevant
@@ -78,23 +80,23 @@ explicit reopening. Subflow outcomes are routing results, not lifecycle statuses
 ## Authority and source ownership
 
 Follow the actual instruction hierarchy and tool permissions of the host environment.
-AIRFlow cannot override system, developer, organization, repository instructions or
+AIDFlow cannot override system, developer, organization, repository instructions or
 permissions. If a higher-priority instruction disallows an action, stop and report it.
 
 | Information | Authoritative source |
 | --- | --- |
 | General execution constraints and access | Applicable host and repository instructions |
 | Process order, decisions and return paths | `flows/project.mmd` and its referenced subflows |
-| Shared status, evidence, resume and change rules | This `airflow.md` and its [reference files](#reference-files) |
-| Approved product intent, feature content and release design | The corresponding approved `.air/` records |
-| AIRFlow-specific execution rules | This `airflow.md`, subject to higher-priority instructions |
-| Record inventory, lifecycle status and active run | `.air/index.md` |
-| Optional issue, board or milestone view | Configured GitHub/GitLab tracker; it does not silently replace `.air/` |
+| Shared status, evidence, resume and change rules | This `aidflow.md` and its [reference files](#reference-files) |
+| Approved product intent, feature content and release design | The corresponding approved `.aidflow/` records |
+| AIDFlow-specific execution rules | This `aidflow.md`, subject to higher-priority instructions |
+| Record inventory, lifecycle status and active run | `.aidflow/index.md` |
+| Optional issue, board or milestone view | Configured GitHub/GitLab tracker; it does not silently replace `.aidflow/` |
 
-When a tracker disagrees with `.air/index.md`, treat the index as AIRFlow's status
+When a tracker disagrees with `.aidflow/index.md`, treat the index as AIDFlow's status
 source. Record the discrepancy. If permissions allow, propose reconciling the tracker
 to the index; do not silently overwrite tracker data. If a project explicitly assigns
-a field to an external system, follow that mapping and record it in `.air/README.md`.
+a field to an external system, follow that mapping and record it in `.aidflow/README.md`.
 
 If two applicable instructions conflict, obey the higher-priority instruction. For
 conflicts between approved project records, an index/record mismatch, or an
@@ -104,7 +106,7 @@ and ask the user. Do not silently overwrite a source or infer which one is newer
 ## Statuses
 
 Keep three kinds of status separate and use only these values; never invent labels.
-All mutable statuses live only in `.air/index.md`, never in content files.
+All mutable statuses live only in `.aidflow/index.md`, never in content files.
 
 - Record approval (`record_status`): `draft`, `pending-approval`, `approved`,
   `superseded`, `withdrawn`. Only a human causes `approved`; never infer approval.
@@ -117,7 +119,7 @@ Read [Statuses](reference/statuses.md) before changing any status.
 
 ## Reference files
 
-Resolve these relative to this `airflow.md`. Do not load them all up front; read a
+Resolve these relative to this `aidflow.md`. Do not load them all up front; read a
 file when its trigger occurs, and again if you are unsure of its rules.
 
 | File | Read when |
@@ -125,7 +127,7 @@ file when its trigger occurs, and again if you are unsure of its rules.
 | [`reference/interaction.md`](reference/interaction.md) | Asking a question, presenting an artifact for review, requesting or recording approval, or handling an incomplete answer |
 | [`reference/approvals.md`](reference/approvals.md) | Recording, invalidating or checking a human approval |
 | [`reference/statuses.md`](reference/statuses.md) | Changing or interpreting any record, feature, release or execution status |
-| [`reference/workspace.md`](reference/workspace.md) | Initializing `.air/` or editing `.air/index.md` structure |
+| [`reference/workspace.md`](reference/workspace.md) | Initializing `.aidflow/` or editing `.aidflow/index.md` structure |
 | [`reference/resume.md`](reference/resume.md) | Resuming a run or when the workflow version changed |
 
 If a required reference file is inaccessible, report the limitation and ask for an

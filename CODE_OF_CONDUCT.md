@@ -1,6 +1,6 @@
 # Code of Conduct
 
-We want AIRFlow to be a welcoming, respectful place for everyone who takes part,
+We want AIDFlow to be a welcoming, respectful place for everyone who takes part,
 whatever their background or experience.
 
 ## Expected behavior

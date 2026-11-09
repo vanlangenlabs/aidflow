@@ -6,7 +6,7 @@ before commit and does not require adding or staging the file. Use an available,
 permitted local SHA-256 tool. For a scope/design approval that covers multiple files,
 list the path and digest for every file.
 
-Append an approval event in `.air/index.md` with at least:
+Append an approval event in `.aidflow/index.md` with at least:
 
 | Field | Required value |
 | --- | --- |
