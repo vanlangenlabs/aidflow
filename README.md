@@ -84,6 +84,7 @@ The workspace is now `.aidflow/`; preserve existing records and approval evidenc
 | Path | Audience | Description |
 | --- | --- | --- |
 | [`aidflow.md`](aidflow.md) | AI agent | The core operating instructions: entry point, rules, authority and a short status overview. Always loaded |
+| [`setup.md`](setup.md) | AI agent | One-time repository setup rules, used by the Copilot Jumpstart prompt. Hands over to `aidflow.md` |
 | [`reference/*.md`](https://github.com/vanlangenlabs/aidflow/tree/main/reference) | AI agent | Detailed rules loaded only when needed: statuses, approvals, workspace templates, resume validation and the interaction protocol |
 | [`flows/*.mmd`](https://github.com/vanlangenlabs/aidflow/tree/main/flows) | AI agent & humans | The workflow itself, as Mermaid flowcharts with embedded node context |
 | [`copilot-instructions.md`](copilot-instructions.md) | You | Snippet to hook AIDFlow into GitHub Copilot |
