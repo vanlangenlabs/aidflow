@@ -43,10 +43,23 @@ flowchart TD
 %% reconciliation before resuming. Apply the user-authorized version
 %% migration rules in `reference/resume.md`; do not silently migrate an active run.
 
+%% ## Input-wait and source-registration revision
+%% Definition and Design now retain missing product decisions at awaitingInput,
+%% with interaction awaiting-input and execution waiting-human. Their quality and
+%% blocked IDs are retained; blocked is reserved for actual obstacles/conflicts.
+%% For an old Definition/Design blocked frame caused only by a missing answer,
+%% map that frame to the same subflow awaitingInput after user-authorized migration.
+%% Preserve its question and caller stack; remove only caller blocked frames that
+%% propagated that same missing-answer outcome. Real blockers stay blocked.
+%% Register used reference files alongside flows and reconcile legacy index
+%% self-records through reference/resume.md; do not invent historical digests.
+%%
 %% Workflow maintenance checks: new project; next release; nested resume; rejected
 %% Design; changed Definition; code/design defects; missing evidence or tracker
 %% conflict; workflow migration; verified feature repair; Design revision with reuse;
-%% removed, deferred and cancelled scope. Trace these before publishing method changes.
+%% removed, deferred and cancelled scope; index initialization without self-hashing;
+%% changed reference rules on resume; partial and sufficient answers in Definition
+%% and Design. Trace these before publishing method changes.
 %% @end-airflow-context
     restore --> resume{Valid saved position?}
     resume -- Yes --> saved([Resume validated node and call stack])

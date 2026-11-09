@@ -83,6 +83,24 @@ Missing product description, requirements or a user decision normally means
 such as unavailable tools/sources, a dependency failure, or a conflict with no
 resolvable owner.
 
+### Mapping interaction to execution
+
+| Interaction state | Current execution status in `.air/index.md` |
+| --- | --- |
+| `working` | `running` while executing, or `ready` when the next step can start |
+| `awaiting-input` | `waiting-human` |
+| `awaiting-review` | `waiting-human` |
+| `awaiting-approval` | `waiting-human` |
+| `blocked` | `blocked` |
+
+A pending Question keeps the active subflow and call stack at its waiting node.
+It does not return a `blocked` outcome to the caller or set feature/release
+lifecycle status to `blocked` merely because an answer is missing. Save the
+question and resume pointer; on a sufficient answer, follow the waiting node
+back to clarification/review. Partial answers remain `awaiting-input`.
+Subflow outcomes route the caller only when the subflow explicitly returns;
+they are distinct from interaction and execution statuses.
+
 Valid transitions:
 
 - `working -> awaiting-input` when missing information prevents the next valid step.

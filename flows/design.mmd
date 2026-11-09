@@ -17,7 +17,16 @@ flowchart TD
     integrate --> review[Check architecture, interfaces, dependencies, risks and acceptance coverage]
     review --> quality{Design complete, consistent and acceptance criteria covered?}
     quality -- No: independently resolvable --> integrate
-    quality -- Missing requirement or decision --> blocked([Blocked: report precise question])
+    quality -- Missing requirement or decision --> awaitingInput[Ask focused question and wait for user input]
+    awaitingInput -- Sufficient answer received --> integrate
+    quality -- Technical obstacle or unresolved conflict --> blocked([Blocked: report obstacle and unblock condition])
+%% @airflow-context awaitingInput
+%% Follow the Question protocol in `reference/interaction.md` (relative to airflow.md).
+%% Save interaction awaiting-input, execution waiting-human, this node and the
+%% caller stack. Do not return to the caller while waiting; partial answers stay
+%% here. An answer does not approve requirements or scope changes: reconcile any
+%% affected approved inputs through their owning phase before continuing Design.
+%% @end-airflow-context
     quality -- Yes: save reviewed draft --> designApproval{Integrated release design approved by user?}
 %% @airflow-context review
 %% Inspect existing architecture and constraints. Check every acceptance criterion
@@ -42,5 +51,5 @@ flowchart TD
 
     classDef boundary fill:#126a52,color:#ffffff,stroke:#126a52
     classDef approval fill:#fff0e8,color:#633b2c,stroke:#c68162
-    class start,designReady,designDeferred,designCancelled boundary
+    class start,designReady,designDeferred,designCancelled,blocked boundary
     class designApproval approval

@@ -18,7 +18,12 @@ Do not store secrets or credentials here.
 # `.air/index.md` inventory and resume template
 
 The index is the canonical inventory and resume point, not a copy of the records.
-Use this structure and keep detailed content in its individual files:
+Use this structure and keep detailed content in its individual files.
+Never register `.air/index.md` in its own Records table or store its own file
+digest inside it: updating that digest would change the file again. The index is
+validated through its structure, record/evidence consistency and available Git
+history; do not treat Git history as human approval. `.air/README.md` may be an
+operational record with a current digest and `record_status: none`.
 
 Use stable project-local IDs: `F-0001` for features, the user-visible version string
 (for example `1.2.0`) for releases, and `A-0001` for approval/change events. Never
@@ -32,7 +37,7 @@ reuse an ID.
 
 | Source path | Role | Ref (commit/tag) | SHA-256 |
 | --- | --- | --- | --- |
-| <airflow.md, Project and each subflow used> | <source role> | <immutable ref or unpinned> | <digest or unknown> |
+| <one row per airflow.md, flow or reference/*.md file read> | <source role> | <immutable ref or unpinned> | <digest or unknown> |
 
 ## Tracker integration
 - provider: <none|github|gitlab>
@@ -73,6 +78,23 @@ Records or content files. Use `none` only for explicitly non-applicable fields.
 | Feature/release | Check | Result | Evidence path/reference | Digest | Current/stale and reason |
 | --- | --- | --- | --- | --- | --- |
 ```
+
+## Workflow source registration
+
+At initialization, prefer resolving the entry source to one immutable commit and
+record it; resolve tags to their commit when possible. Re-read the entry file at
+that ref before using it, so an earlier read from `main` is not mixed into the run.
+Read all flows and reference
+files from that same version, including files first needed later in the run.
+Register each file when read, with its path, role, ref and SHA-256 of the exact
+bytes. This includes `airflow.md`, Project, each used subflow and each used
+`reference/*.md`; do not load unused reference files just to populate the table.
+
+If an immutable ref is unavailable, record `unpinned` and the available digests.
+Keep a consistent local snapshot or obtain a version-consistent copy before
+loading another file; do not silently add a latest file to an older snapshot.
+Unknown provenance or missing digests are not proof of a consistent version.
+Follow [resume validation](resume.md) when consistency cannot be established.
 
 Use stable node IDs in every Mermaid flow and keep them stable across compatible
 workflow revisions. If an ID must change, document an old-to-new mapping in the new

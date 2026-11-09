@@ -26,10 +26,13 @@ Use separate tables so a release has exactly one lifecycle status:
 | Entity / index table | Field | Meaning |
 | --- | --- | --- |
 | Concept, Definition, scope and Design / Records | `record_status` | Approval state of that content version. |
-| README and index / Records | `record_status: none` | Operational files; `none` means not applicable, not approval. |
+| README / Records | `record_status: none` | Operational files; `none` means not applicable, not approval. |
 | Feature / Features | `feature_status` | Delivery state of that feature ID. |
 | Release / Releases | `release_status` | Delivery state of the whole version, never of an individual file. |
 | Current execution | `status` | Whether the current workflow action can run. |
+
+The index itself is not a Records entry and has no self-digest. See the
+[workspace rules](workspace.md) for its integrity and history.
 
 A Design uses `record_status: draft`, `pending-approval` or `approved`; it never
 uses these values as `release_status`. A release can be `design-pending-approval`
@@ -55,7 +58,7 @@ Execution status is separate from all record and feature/release statuses. Use o
 
 - `ready`: next action is known and can proceed under the workflow.
 - `running`: an authorized subflow is in progress.
-- `waiting-human`: an explicit decision or approval is required.
+- `waiting-human`: user input, artifact review or explicit approval is required.
 - `blocked`: a conflict, missing evidence, unavailable source or external blocker
   prevents safe continuation.
 - `complete`: the relevant subflow reached its successful terminal node.
