@@ -23,7 +23,7 @@ flowchart TD
     complete -- Yes: return to caller --> implementationComplete([Feature implementation complete])
     complete -- Blocked or scope unclear: stop and report --> blocked([Blocked: ask user])
 
-    classDef boundary fill:#126a52,color:#ffffff,stroke:#126a52
+    classDef boundary fill:#0b7fae,color:#ffffff,stroke:#0b7fae
     class start,implementationComplete,blocked boundary
     classDef approval fill:#fff0e8,color:#633b2c,stroke:#c68162
     class complete approval

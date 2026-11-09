@@ -326,8 +326,8 @@ function renderSource(id) {
         theme: theme === 'dark' ? 'dark' : 'base',
         fontFamily: 'DM Sans, sans-serif',
         themeVariables: theme === 'light' ? {
-          primaryColor: '#e4f2eb', primaryTextColor: '#202b29', primaryBorderColor: '#43816b',
-          lineColor: '#64736d', secondaryColor: '#fff0e8', tertiaryColor: '#f1f4f2'
+          primaryColor: '#e1f3fb', primaryTextColor: '#1f2b30', primaryBorderColor: '#2f9bc9',
+          lineColor: '#62727b', secondaryColor: '#fff0e8', tertiaryColor: '#eef3f6'
         } : {},
         flowchart: { htmlLabels: false, useMaxWidth: false, curve: 'basis' },
         suppressErrorRendering: true

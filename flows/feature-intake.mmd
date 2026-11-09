@@ -37,7 +37,7 @@ flowchart TD
     anyApproved -- Yes --> intakeReady([Approved backlog ready for release planning])
     anyApproved -- No --> noApproved([No approved feature: pause project])
 
-    classDef boundary fill:#126a52,color:#ffffff,stroke:#126a52
+    classDef boundary fill:#0b7fae,color:#ffffff,stroke:#0b7fae
     class start,intakeReady,noApproved boundary
     classDef approval fill:#fff0e8,color:#633b2c,stroke:#c68162
     class ready,another,anyApproved approval
