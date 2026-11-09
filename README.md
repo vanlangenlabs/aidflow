@@ -9,7 +9,7 @@ last session, or declare work "done" without evidence. AIDFlow gives an agent
 a clear process to follow, with explicit places where it must stop and ask a
 human.
 
-[<img width="1536" height="1024" alt="AIDFlow" src="https://github.com/user-attachments/assets/e419298c-cc10-4b62-9ef4-a8d2fcf4d0e2" />](https://aidflow.vanlangen.org)
+[<img width="1536" height="1024" alt="AIDFlow" src="assets/aidflow.png" />](https://aidflow.vanlangen.org)
 
 ## Why AIDFlow?
 
