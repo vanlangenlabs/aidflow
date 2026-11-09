@@ -60,7 +60,7 @@ h1 { margin: 0; font-size: 25px; font-weight: 700; }
 .viewer-layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; align-items: start; }
 .viewer-content { min-width: 0; }
 .sidebar { border-top: 1px solid var(--line); padding-top: 8px; min-width: 0; }
-.sidebar > details > summary { font-size: 13px; font-weight: 600; padding: 14px 8px; }
+.sidebar-title { margin: 0; font: 600 13px 'DM Sans', sans-serif; padding: 14px 8px; }
 #navigation-status { padding: 0 8px; color: var(--muted); font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
 .workflow-tree, .workflow-tree ul { list-style: none; margin: 0; padding: 0; }
 .workflow-tree ul { margin-left: 16px; padding-left: 10px; border-left: 1px solid var(--line); }

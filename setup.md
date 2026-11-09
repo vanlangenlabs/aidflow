@@ -20,19 +20,20 @@ user's behalf.
    ```markdown
    # AIDFlow
 
-   For development work, read and follow
-   https://raw.githubusercontent.com/vanlangenlabs/aidflow/main/aidflow.md
-   before acting or resuming. Resolve its Project and flow links relative to that URL and keep all sources
-   on the same version. If inaccessible, report the limitation and request an
-   accessible copy; do not guess.
+   For development work, read and follow https://raw.githubusercontent.com/vanlangenlabs/aidflow/main/aidflow.md
+   before acting or resuming. It defines the workflow and links to its Mermaid flows.
+   If the repository has no `.aidflow/` folder yet, first read and follow
+   https://raw.githubusercontent.com/vanlangenlabs/aidflow/main/setup.md.
+   If inaccessible, report the limitation and request an accessible copy; do not guess.
    ```
 
 3. Initialize the consuming project's `.aidflow/` workspace as directed by
    `aidflow.md`, preserving existing files.
-4. Start the Concept Question interaction in a pull request comment titled
-   "Questions for the project owner". Do not put the questions only in the pull
-   request description. If you cannot post a comment, state that limitation in
-   the pull request and stop.
+4. Start the Concept Question interaction. When working asynchronously (for
+   example as the Copilot coding agent), post it in a pull request comment titled
+   "Questions for the project owner"; do not put the questions only in the pull
+   request description, and if you cannot post a comment, state that limitation
+   in the pull request and stop. In an interactive session, ask directly.
    - If the project purpose is not already clear, first ask what the project
      should do or what problem it should solve.
    - Follow the Question protocol and `reference/concept-example.md` to identify other
@@ -46,7 +47,8 @@ user's behalf.
    or instruction should be processed. Several answers may be bundled in one
    comment. A plain reply may not start or resume a task. Repeat this reminder
    for follow-up questions.
-8. End this task after asking. Do not continue until the user responds.
+8. Do not continue until the user responds. When working asynchronously, end
+   the task after asking.
 
 ## After the user answers
 
