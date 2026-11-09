@@ -165,6 +165,7 @@ footer { display: flex; justify-content: space-between; gap: 16px; color: var(--
 }
 @media (prefers-reduced-motion: reduce) { .theme-switch input::after { transition: none; } }
 #welcome-dialog { width: min(560px, calc(100% - 32px)); }
+#welcome-dialog .welcome-image { display: block; width: min(300px, 100%); height: auto; margin: 4px auto 16px; border-radius: 6px; }
 #welcome-dialog p { color: var(--muted); font-size: 14px; line-height: 1.7; }
 .welcome-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 .welcome-actions button { padding: 10px 14px; }
