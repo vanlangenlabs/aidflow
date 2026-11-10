@@ -61,11 +61,30 @@ are part of the Mermaid source even though they are not rendered in the diagram.
 
 ## Workspace and incremental context
 
-Keep project records in the consuming repository's `.aidflow/`, not in the method copy at `.aidflow/method/`.
-After reading Project, inspect README and relevant index entries. Initialize missing
-files from the [workspace templates](reference/workspace.md); preserve existing records and ask before replacing
-conflicting content. Read only the active subflow, embedded context and relevant
-records. Phase record outlines and transitions live in the flows.
+In the consuming repository, put only AIDFlow's project output documents—the
+Concept, feature Definitions, release scopes and Designs—in `docs/aidflow/`.
+This does not move the AIDFlow method: flows, references and instructions remain
+in the pinned `.aidflow/method/` copy, and workspace administration remains in
+`.aidflow/`. Status, progress, workflow routing, approvals, change events and
+verification evidence belong in `.aidflow/index.md`, not in the output documents.
+Product decisions and their rationale may remain in the relevant output document;
+they do not establish workflow approval or status. The documents in `docs/aidflow/`
+are the canonical content records, not generated copies; their paths and digests
+belong in the index.
+After reading Project, inspect the workspace READMEs and relevant index entries.
+Initialize missing files from the [workspace templates](reference/workspace.md);
+preserve existing files and ask before adopting or replacing conflicting content.
+Read only the active subflow, embedded context and relevant records. Phase record
+outlines and transitions live in the flows.
+
+Project documents are AI-managed, not technically read-only. Add the notice from
+the workspace templates to each one before review or approval. Users are encouraged
+to request changes through the agent, but may edit files directly; filesystem
+permissions do not enforce this convention. On resume and before using an indexed
+document for a decision or modifying it, compare its exact bytes with its current
+indexed digest. If they differ, preserve the file, treat the change as a proposed
+change, and follow resume validation before proceeding. Act on a clear change via
+the responsible workflow; do not silently overwrite it or assume it is approved.
 
 ## Change handling and autonomy
 
@@ -94,7 +113,7 @@ permissions. If a higher-priority instruction disallows an action, stop and repo
 | General execution constraints and access | Applicable host and repository instructions |
 | Process order, decisions and return paths | `flows/project.mmd` and its referenced subflows |
 | Shared status, evidence, resume and change rules | This `aidflow.md` and its [reference files](#reference-files) |
-| Approved product intent, feature content and release design | The corresponding approved `.aidflow/` records |
+| Approved product intent, feature content and release design | The corresponding approved `docs/aidflow/` records |
 | AIDFlow-specific execution rules | This `aidflow.md`, subject to higher-priority instructions |
 | Record inventory, lifecycle status and active run | `.aidflow/index.md` |
 | Optional issue, board or milestone view | Configured GitHub/GitLab tracker; it does not silently replace `.aidflow/` |
@@ -105,9 +124,11 @@ to the index; do not silently overwrite tracker data. If a project explicitly as
 a field to an external system, follow that mapping and record it in `.aidflow/README.md`.
 
 If two applicable instructions conflict, obey the higher-priority instruction. For
-conflicts between approved project records, an index/record mismatch, or an
-unmapped tracker disagreement, stop the affected transition, record the discrepancy,
-and ask the user. Do not silently overwrite a source or infer which one is newer.
+conflicts between approved project records, an unresolved index/record mismatch,
+or an unmapped tracker disagreement, stop the affected transition, record the
+discrepancy, and ask the user. A detectable document edit is handled as a proposed
+change under resume validation; it is not by itself an unrecoverable conflict.
+Do not silently overwrite a source or infer which one is newer.
 
 ## Statuses
 

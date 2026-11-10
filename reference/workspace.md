@@ -6,8 +6,9 @@ project instructions that do not conflict with [`aidflow.md`](../aidflow.md):
 ```markdown
 # AIDFlow project workspace
 
-This directory contains AI-managed project records used by AIDFlow. It is not a
-general-purpose documentation folder.
+This directory contains AIDFlow's workflow administration and pinned method,
+including its flows, references and instructions. Only project output documents
+are in `docs/aidflow/`.
 
 Do not edit these records directly. Ask the AIDFlow agent to update them through
 the workflow, then review and approve proposed changes before they are merged.
@@ -15,10 +16,59 @@ the workflow, then review and approve proposed changes before they are merged.
 Do not store secrets or credentials here.
 ```
 
+# `docs/aidflow/README.md` template
+
+Initialize this readable entry point, preserving any existing file and asking
+before adopting or replacing conflicting content:
+
+```markdown
+# AIDFlow project documents
+
+> Managed by AIDFlow. Request changes through the agent rather than editing
+> this document directly; review and approve proposed changes through AIDFlow.
+
+These documents describe the project and are managed by the AIDFlow agent.
+Read and review them here. To request a change, ask the agent instead of editing
+the documents directly; review and approve the proposed changes through AIDFlow.
+
+- `concept.md`: product purpose and boundaries.
+- `features/<feature-id>/definition.md`: feature definitions.
+- `releases/<version>/scope.md` and `design.md`: release scope and design.
+
+Documents are created as the project progresses. Workflow status, progress,
+process decisions and approval evidence are kept in `.aidflow/index.md`.
+This is a working convention, not a filesystem permission or protection against
+edits. If you edit a document directly, the agent can detect the change and
+assess it through the workflow; editing is not the same as approving it.
+```
+
+Keep only the canonical Concept, feature Definition, release scope and Design
+outputs at the paths above, including drafts. Do not maintain a second copy in
+`.aidflow/`. Flows, references, instructions, workspace administration and status
+remain in `.aidflow/` (the method under `.aidflow/method/`). Register output
+document paths and exact-byte digests in the index.
+Preserve unrelated files in `docs/`; if a target path already exists and is not
+an established AIDFlow record, do not overwrite or silently adopt it: ask the user
+how to proceed. Do not automatically move existing records or upgrade a pinned
+method; migration is not supported.
+
+Add this visible notice near the top of each managed project document before
+calculating its digest or requesting review:
+
+```markdown
+> Managed by AIDFlow. Request changes through the agent rather than editing
+> this document directly; review and approve proposed changes through AIDFlow.
+```
+
+The notice is part of the document's exact bytes and approval digest. It does not
+apply to `.aidflow/` administration, the pinned method or unrelated `docs/` files.
+Do not enforce the convention with filesystem permissions.
+
 # `.aidflow/index.md` inventory and resume template
 
 The index is the canonical inventory and resume point, not a copy of the records.
-Use this structure and keep detailed content in its individual files.
+Keep workflow status, progress, routing decisions, approvals, change events and
+verification evidence here; keep detailed product content in its individual files.
 Never register `.aidflow/index.md` in its own Records table or store its own file
 digest inside it: updating that digest would change the file again. The index is
 validated through its structure, record/evidence consistency and available Git

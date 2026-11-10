@@ -47,9 +47,12 @@ is a version change that needs the user's authorization.
    ```
 
 4. Read `.aidflow/method/aidflow.md` and follow its Project entry point. Initialize
-   the `.aidflow/` project records as it directs, preserving existing files, and
-   register every copied file with the source commit and SHA-256 in
-   `.aidflow/index.md`.
+   `.aidflow/` administration and the project output documents in `docs/aidflow/`
+   as it directs, preserving existing files. The Concept, feature Definitions,
+   release scopes and Designs are the only workflow outputs placed in `docs/`;
+   keep the pinned method, flows, references and workflow state in `.aidflow/`.
+   Register output document paths and digests, and every copied method file with
+   its source commit and SHA-256, in `.aidflow/index.md`.
 5. Start the Concept Question interaction. When working asynchronously (for
    example as the Copilot coding agent), post it in a pull request comment titled
    "Questions for the project owner"; do not put the questions only in the pull
@@ -59,7 +62,7 @@ is a version change that needs the user's authorization.
      should do or what problem it should solve.
    - Follow the Question protocol and `.aidflow/method/reference/concept-example.md`
      to identify other missing information. Ask only focused questions needed to
-     fill `.aidflow/concept.md`.
+     fill `docs/aidflow/concept.md`.
 6. Record the unanswered questions and next action as a pending interaction in
    `.aidflow/index.md`.
 7. Explain the setup changes, checks performed and how to resume in the pull
@@ -73,7 +76,7 @@ is a version change that needs the user's authorization.
 
 ## After the user answers
 
-Resume from `.aidflow/index.md`. Use the answers to draft `.aidflow/concept.md`
+Resume from `.aidflow/index.md`. Use the answers to draft `docs/aidflow/concept.md`
 and present that exact version for review and explicit approval. Keep unresolved
 questions visible. Do not begin feature intake or implementation until the
 concept is approved.

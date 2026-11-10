@@ -19,11 +19,11 @@ flowchart TD
 %% @aidflow-context clarify
 %% Ask only for information needed to write a useful Definition: affected users,
 %% problem, expected outcome/value, scope and non-goals. Do not infer missing
-%% requirements. Keep this proposal under one stable feature ID in `.aidflow/`.
+%% requirements. Keep this proposal under one stable feature ID.
 %% @end-aidflow-context
     clarify --> ready{Enough information to prepare a Definition draft?}
     ready -- No: ask and refine --> clarify
-    ready -- Yes: create or update draft --> draft[Draft feature Definition in `.aidflow/features/F-0001/definition.md`]
+    ready -- Yes: create or update draft --> draft[Draft feature Definition in `docs/aidflow/features/F-0001/definition.md`]
     draft --> definition[["Definition: definition.mmd"]]
     definition -- Blocked --> blocked([Blocked: report obstacle and unblock condition])
     definition -- Approved: add to `.aidflow/index.md` backlog --> backlog[Feature in approved backlog]

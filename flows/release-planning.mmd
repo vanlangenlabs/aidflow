@@ -16,7 +16,7 @@ flowchart TD
     scopeApproval -- No: revise proposed scope --> propose
     scopeApproval -- Defer release planning --> planningDeferred([Release planning deferred])
     scopeApproval -- Cancel release --> releaseCancelled([Release cancelled])
-    scopeApproval -- Yes: record version and feature IDs --> scope[Write release scope in `.aidflow/releases/1.2.0/scope.md`]
+    scopeApproval -- Yes: record version and feature IDs --> scope[Record approval for `docs/aidflow/releases/1.2.0/scope.md`]
     scope --> scopeReady([Release scope approved])
 %% @aidflow-context scopeApproval
 %% The human approves the exact version, included feature IDs, exclusions and
@@ -46,7 +46,7 @@ flowchart TD
     class scopeApproval approval
 
 %% @aidflow-context propose
-%% Record path: `.aidflow/releases/<version>/scope.md`.
+%% Record path: `docs/aidflow/releases/<version>/scope.md`.
 %% Record outline: Release goal; Included feature IDs; Excluded or deferred feature IDs; Dependencies and ordering; Release-level acceptance criteria.
 %% Mutable statuses belong in the index. Example IDs and versions are placeholders.
 %% @end-aidflow-context

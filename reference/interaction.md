@@ -11,7 +11,7 @@ complements the Mermaid flows; it does not replace them.
 - `flows/project.mmd` determines the current phase and next transition.
 - The active subflow and its `@aidflow-context` define phase-specific work and gates.
 - This chapter governs Questions, Reviews, Approvals and resumable interactions.
-- `.aidflow/` records project-specific facts and current state as defined in [Workspace templates](workspace.md).
+- `docs/aidflow/` holds project documents; `.aidflow/` holds workflow administration as defined in [Workspace templates](workspace.md).
 
 Follow the host's instruction hierarchy and tool permissions. This protocol cannot
 authorize actions that another applicable instruction or permission disallows. Never
@@ -24,7 +24,7 @@ convenient.
 
 Use a Question when required information or a user decision is missing.
 
-1. Inspect the active `.aidflow/` records, relevant previous interactions and active
+1. Inspect the active project records, index, relevant previous interactions and active
     subflow before asking. Do not ask for information already available.
 2. Ask only focused questions needed for the current phase. In interactive channels,
     ask incrementally when an answer can narrow the next question. In asynchronous

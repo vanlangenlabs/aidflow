@@ -16,7 +16,7 @@ human. Visit:
 
 - **Predictable process** – the agent follows a defined flow instead of improvising.
 - **Human in control** – concept, scope, design and release decisions need explicit approval. The agent never approves its own work.
-- **Resumable** – all decisions, status and evidence are stored in the project's `.aidflow/` folder, so work can be picked up again in a new session or by another agent.
+- **Resumable** – project documents live in `docs/aidflow/`, with status and evidence in `.aidflow/`, so work can be picked up again in a new session or by another agent.
 - **Traceable** – changes to requirements or design invalidate only the approvals and verification they affect, and every step leaves evidence.
 - **Tool-agnostic** – plain Markdown and Mermaid files; no runtime, no dependencies. It works with any agent that can read files or fetch URLs.
 
@@ -71,7 +71,13 @@ If a source is inaccessible, report the limitation and request an accessible cop
 On first use the agent follows [`setup.md`](setup.md). It saves a pinned, unmodified
 copy of `aidflow.md`, the flows and the reference files in `.aidflow/method/` of
 **your** repository, adds the instruction above to your agent's instruction file, and
-initializes your project records in `.aidflow/`. From then on the agent works only
+initializes readable, AI-managed project documents in `docs/aidflow/` and workflow
+administration in `.aidflow/`. Ask the agent to change these documents rather than
+editing them directly, then review and approve its proposals. This is a convention,
+not filesystem-enforced read-only access. If a document is edited directly, the
+agent detects the changed digest and processes it through the workflow; the edit
+itself is not approval. Status, progress, process decisions and approval evidence
+remain in `.aidflow/index.md`. From then on the agent works only
 from that local copy, so the method cannot change underneath a running project.
 Updating to a newer version is a deliberate, user-authorized step.
 

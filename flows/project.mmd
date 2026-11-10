@@ -1,18 +1,57 @@
 flowchart TD
     start([Start or resume project]) --> restore[Validate index, workflow version, records and evidence]
 %% @aidflow-context restore
-%% Initialize missing .aidflow/ using `reference/workspace.md` (relative to aidflow.md). On resume, follow `reference/resume.md`;
+%% Initialize missing .aidflow/ administration and docs/aidflow/ documentation using `reference/workspace.md` (relative to aidflow.md). On resume, follow `reference/resume.md`;
 %% validate the saved node and call stack, then continue that exact pending step;
 %% the entry decision below is for runs without an active saved position.
+%% A detected document edit follows documentChange before the affected work resumes.
 %% Do not replay Concept or choose a phase from artifact existence alone.
 %% @end-aidflow-context
     restore --> resume{Valid saved position?}
     resume -- Yes --> saved([Resume validated node and call stack])
+    resume -- Document change needs repair --> documentChange[Assess changed project document]
     resume -- Inconsistent --> blocked([Blocked: report evidence and required decision])
     resume -- No active position --> conceptNeeded{Current Concept approval valid?}
     conceptNeeded -- No --> concept[["Concept: concept.mmd"]]
     conceptNeeded -- Yes --> featureIntake[["Feature intake: feature-intake.mmd"]]
     concept -- Concept approved --> featureIntake
+%% @aidflow-context documentChange
+%% Follow `reference/resume.md` and `reference/release-lifecycle.md`. Save the
+%% interrupted node, call stack, arguments and pending targets in the index.
+%% Apply cross-phase impact and lifecycle repair rules; preserve unaffected evidence
+%% only with a rationale. If several records are affected, repair prerequisites
+%% first. An editorial change with a documented approval derivation goes directly
+%% to repairDone. Block if a conflict or impact cannot be resolved.
+%% When a change is detected during a run, pause the subflow and return to Project
+%% at a phase boundary without treating the interrupted subflow as successful.
+%% @end-aidflow-context
+    documentChange -- Concept needs review --> repairConcept[["Concept: concept.mmd"]]
+    documentChange -- Definition needs review --> repairDefinition[["Definition: definition.mmd"]]
+    documentChange -- Scope needs review --> repairScope[["Release planning: release-planning.mmd"]]
+    documentChange -- Design needs review --> repairDesign[["Design: design.mmd"]]
+    documentChange -- No approval repair needed --> repairDone[Revalidate interrupted work]
+    documentChange -- Unresolved conflict or impact --> blocked
+    repairConcept -- Concept approved --> repairDone
+    repairDefinition -- Revised and approved --> repairDone
+    repairDefinition -- Deferred or rejected --> projectIdle
+    repairDefinition -- Blocked --> blocked
+    repairScope -- Scope approved --> repairDone
+    repairScope -- Planning deferred or release cancelled --> projectIdle
+    repairDesign -- Design approved --> repairDone
+    repairDesign -- Release deferred or cancelled --> projectIdle
+    repairDesign -- Blocked --> blocked
+    repairDone -- More prerequisite repairs --> documentChange
+    repairDone -- Interrupted position valid --> saved
+    repairDone -- No active position --> conceptNeeded
+    repairDone -- Feature work needs repair --> select
+    repairDone -- Unresolved conflict or impact --> blocked
+%% @aidflow-context repairDone
+%% Revalidate dependent approvals, statuses and evidence before restoring the saved
+%% position, if one exists. Route additional affected Concept, Definition, scope
+%% or Design records through documentChange in dependency order. For affected
+%% feature work, use select and the lifecycle repair rules. Do not resume a
+%% deferred or cancelled entity.
+%% @end-aidflow-context
     featureIntake -- Approved backlog ready --> releasePlanning[["Release planning: release-planning.mmd"]]
     featureIntake -- Blocked --> blocked
     featureIntake -- No approved features --> projectIdle([Project idle])

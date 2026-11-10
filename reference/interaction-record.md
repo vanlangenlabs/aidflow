@@ -33,4 +33,4 @@ include this optional section; omit it when there is no pending interaction:
 
 This is a resume pointer, not a second copy of the conversation or artifact. Keep
 the complete approval/change evidence in the existing approval-event record and
-the actual artifact in its normal `.aidflow/` path.
+the actual artifact in its canonical project-document path.
