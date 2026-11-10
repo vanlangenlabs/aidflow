@@ -10,7 +10,7 @@ a clear process to follow, with explicit places where it must stop and ask a
 human.
 
 <img width="1536" height="1024" alt="AIDFlow" src="assets/aidflow.png" />
-[https://aidflow.vanlangen.org](https://aidflow.vanlangen.org)
+[aidflow website](https://aidflow.vanlangen.org)
 
 ## Why AIDFlow?
 
