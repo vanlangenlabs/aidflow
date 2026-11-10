@@ -7,8 +7,9 @@ AI agents are great at writing code, but left alone they tend to skip steps:
 they start building before the problem is understood, forget what was decided
 last session, or declare work "done" without evidence. AIDFlow gives an agent
 a clear process to follow, with explicit places where it must stop and ask a
-human. Visit: 
-[aidflow website](https://aidflow.vanlangen.org)
+human. 
+
+Visit: [AIDFlow website](https://aidflow.vanlangen.org)
 
 <img width="1536" height="1024" alt="AIDFlow" src="assets/aidflow.png" />
 
